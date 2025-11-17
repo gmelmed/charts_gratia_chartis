@@ -12,5 +12,4 @@ county_centroids['fips'] = county_centroids['STATEFP'] * 1000 + county_centroids
 county_centroids.columns = county_centroids.columns.str.lower()
 
 # save to csv
-county_centroids.to_csv('data/county_centroids.csv', index=False)
-
+county_centroids.to_csv('rent_tracker/data/county_centroids.csv', index=False)
