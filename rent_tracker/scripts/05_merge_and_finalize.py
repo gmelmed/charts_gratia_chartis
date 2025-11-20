@@ -153,6 +153,46 @@ def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
     
     return zori_metro_long
 
+def create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities):
+    """Create most recent homebuilding data for ALL metro areas (not just top 50)."""
+    print("  Creating most recent homebuilding dataset for all metros...")
+    
+    homebuilding_all = homebuilding_raw_all.copy()
+    
+    # Calculate multi-unit total
+    homebuilding_all['multi_total'] = (homebuilding_all['2 Units'] + 
+                                        homebuilding_all['3 and 4 Units'] + 
+                                        homebuilding_all['5 Units or More'])
+    
+    # Lowercase columns
+    homebuilding_all.columns = homebuilding_all.columns.str.lower()
+    
+    # Get most recent date
+    most_recent_date = homebuilding_all['date'].max()
+    homebuilding_all = homebuilding_all[homebuilding_all['date'] == most_recent_date]
+    
+    # Merge with population data
+    homebuilding_all = pd.merge(homebuilding_all, metros_pop, on='name', how='left')
+    
+    # Merge with cities for lat/lng
+    homebuilding_all = pd.merge(homebuilding_all, cities[['name', 'lat', 'lng']], 
+                                  on='name', how='left')
+    
+    # Add region
+    homebuilding_all['region'] = homebuilding_all['name'].map(config.REGION_MAP)
+    
+    # Select final columns
+    homebuilding_all = homebuilding_all[['name', 'date', 'total', '1 unit', '2 units', 
+                                          '3 and 4 units', '5 units or more', 'multi_total',
+                                          'population', 'lat', 'lng', 'region']]
+    
+    # Save
+    homebuilding_all.to_csv(config.HOMEBUILDING_MOST_RECENT_ALL, index=False)
+    print(f"    ✓ Saved to: {config.HOMEBUILDING_MOST_RECENT_ALL}")
+    print(f"      Rows: {len(homebuilding_all)}, Metros: {homebuilding_all['name'].nunique()}")
+    print(f"      Date: {most_recent_date}")
+    
+    return homebuilding_all
 
 def create_final_merged_datasets(zori_metro_long, homebuilding):
     """Create final merged datasets with most recent data."""
@@ -211,16 +251,20 @@ def merge_and_finalize():
     
     # Load all raw data
     print("Loading raw data...")
-    homebuilding_raw = pd.read_csv(config.HOMEBUILDING_RAW)
+    homebuilding_raw_all = pd.read_csv(config.HOMEBUILDING_RAW)
+    homebuilding_raw_top = pd.read_csv(config.HOMEBUILDING_RAW_TOP)
     metros_pop = pd.read_csv(config.POPULATION_RAW)
     cities = pd.read_csv(config.CITIES_RAW)
     zori_county_wide = pd.read_csv(config.ZILLOW_COUNTY_RAW)
     zori_metro_wide = pd.read_csv(config.ZILLOW_METRO_RAW)
-    print("  ✓ All raw data loaded\n")
+    print("  ✓ All raw data loaded")
+    print(f"    - All metros: {homebuilding_raw_all['Name'].nunique()}")
+    print(f"    - Top 50 metros: {homebuilding_raw_top['Name'].nunique()}\n")
     
-    # Process each dataset
+    # Process each dataset - use top 50 for the main processing
     print("Processing datasets...")
-    homebuilding = process_homebuilding_data(homebuilding_raw, metros_pop, top_metros)
+    homebuilding = process_homebuilding_data(homebuilding_raw_top, metros_pop, top_metros)
+    homebuilding_all = create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities)  # NEW LINE
     zori_county_clean = process_zillow_county_data(zori_county_wide)
     zori_metro_long = process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros)
     print()
@@ -231,6 +275,7 @@ def merge_and_finalize():
     print(f"\n✓ Data merge and finalization complete!")
     print(f"\nFinal outputs:")
     print(f"  - {config.HOMEBUILDING_CLEAN}")
+    print(f"  - {config.HOMEBUILDING_MOST_RECENT_ALL}")  # NEW LINE
     print(f"  - {config.ZORI_COUNTY_CLEAN}")
     print(f"  - {config.ZORI_METRO_LONG}")
     print(f"  - {config.ZORI_METRO_MOST_RECENT}")

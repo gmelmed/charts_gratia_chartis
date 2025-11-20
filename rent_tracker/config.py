@@ -70,6 +70,7 @@ ZILLOW_METRO_RAW = RAW_DATA_DIR + 'zillow_metro_raw.csv'
 # Processed data output paths
 PROCESSED_DATA_DIR = 'data/processed/'     # CHANGED: removed rent_tracker/
 HOMEBUILDING_CLEAN = PROCESSED_DATA_DIR + 'homebuilding_clean.csv'
+HOMEBUILDING_MOST_RECENT_ALL = PROCESSED_DATA_DIR + 'homebuilding_most_recent_all.csv'
 ZORI_COUNTY_CLEAN = PROCESSED_DATA_DIR + 'zori_county_clean.csv'
 ZORI_METRO_LONG = PROCESSED_DATA_DIR + 'zori_metro_long.csv'
 ZORI_METRO_MOST_RECENT = PROCESSED_DATA_DIR + 'zori_metro_most_recent.csv'
