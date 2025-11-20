@@ -37,7 +37,7 @@ def process_homebuilding_data(homebuilding_raw, metros_pop, top_metros):
         .reset_index(level=0, drop=True)
     )
     
-    # CHANGED: Keep the original columns plus the running totals
+    # Keep the original columns plus the running totals
     homebuilding = homebuilding[['name', 'date', 'total', '1 unit', '2 units', 
                                   '3 and 4 units', '5 units or more', 'multi_total',
                                   'rt', 'multi_rt']]
@@ -57,6 +57,72 @@ def process_homebuilding_data(homebuilding_raw, metros_pop, top_metros):
     print(f"    ✓ Saved to: {config.HOMEBUILDING_CLEAN}")
     
     return homebuilding
+
+
+def create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities):
+    """Create most recent homebuilding data for ALL metro areas with running totals."""
+    print("  Creating most recent homebuilding dataset for all metros...")
+    
+    homebuilding_all = homebuilding_raw_all.copy()
+    
+    # Calculate multi-unit total
+    homebuilding_all['multi_total'] = (homebuilding_all['2 Units'] + 
+                                        homebuilding_all['3 and 4 Units'] + 
+                                        homebuilding_all['5 Units or More'])
+    
+    # Lowercase columns
+    homebuilding_all.columns = homebuilding_all.columns.str.lower()
+    
+    # Ensure the DataFrame is sorted by 'name' and 'date' for rolling calculations
+    homebuilding_all = homebuilding_all.sort_values(by=['name', 'date'])
+    
+    # Create 12-month running totals BEFORE filtering to most recent
+    homebuilding_all['rt'] = (
+        homebuilding_all.groupby('name')['total']
+        .rolling(window=12, min_periods=1)
+        .sum()
+        .reset_index(level=0, drop=True)
+    )
+    
+    homebuilding_all['multi_rt'] = (
+        homebuilding_all.groupby('name')['multi_total']
+        .rolling(window=12, min_periods=1)
+        .sum()
+        .reset_index(level=0, drop=True)
+    )
+    
+    # NOW filter to most recent date
+    most_recent_date = homebuilding_all['date'].max()
+    homebuilding_all = homebuilding_all[homebuilding_all['date'] == most_recent_date]
+    
+    # Merge with population data
+    homebuilding_all = pd.merge(homebuilding_all, metros_pop, on='name', how='left')
+    
+    # Calculate per capita metrics (per 1000 people)
+    homebuilding_all['rt_pc'] = (homebuilding_all['rt'] / homebuilding_all['population']) * 1000
+    homebuilding_all['multi_rt_pc'] = (homebuilding_all['multi_rt'] / homebuilding_all['population']) * 1000
+    
+    # Merge with cities for lat/lng
+    homebuilding_all = pd.merge(homebuilding_all, cities[['name', 'lat', 'lng']], 
+                                  on='name', how='left')
+    
+    # Add region
+    homebuilding_all['region'] = homebuilding_all['name'].map(config.REGION_MAP)
+    
+    # Select final columns
+    homebuilding_all = homebuilding_all[['name', 'date', 'total', '1 unit', '2 units', 
+                                          '3 and 4 units', '5 units or more', 'multi_total',
+                                          'rt', 'multi_rt', 'population', 'rt_pc', 'multi_rt_pc',
+                                          'lat', 'lng', 'region']]
+    
+    # Save
+    homebuilding_all.to_csv(config.HOMEBUILDING_MOST_RECENT_ALL, index=False)
+    print(f"    ✓ Saved to: {config.HOMEBUILDING_MOST_RECENT_ALL}")
+    print(f"      Rows: {len(homebuilding_all)}, Metros: {homebuilding_all['name'].nunique()}")
+    print(f"      Date: {most_recent_date}")
+    
+    return homebuilding_all
+
 
 def process_zillow_county_data(zori_county_wide):
     """Process Zillow county data to calculate changes."""
@@ -153,46 +219,6 @@ def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
     
     return zori_metro_long
 
-def create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities):
-    """Create most recent homebuilding data for ALL metro areas (not just top 50)."""
-    print("  Creating most recent homebuilding dataset for all metros...")
-    
-    homebuilding_all = homebuilding_raw_all.copy()
-    
-    # Calculate multi-unit total
-    homebuilding_all['multi_total'] = (homebuilding_all['2 Units'] + 
-                                        homebuilding_all['3 and 4 Units'] + 
-                                        homebuilding_all['5 Units or More'])
-    
-    # Lowercase columns
-    homebuilding_all.columns = homebuilding_all.columns.str.lower()
-    
-    # Get most recent date
-    most_recent_date = homebuilding_all['date'].max()
-    homebuilding_all = homebuilding_all[homebuilding_all['date'] == most_recent_date]
-    
-    # Merge with population data
-    homebuilding_all = pd.merge(homebuilding_all, metros_pop, on='name', how='left')
-    
-    # Merge with cities for lat/lng
-    homebuilding_all = pd.merge(homebuilding_all, cities[['name', 'lat', 'lng']], 
-                                  on='name', how='left')
-    
-    # Add region
-    homebuilding_all['region'] = homebuilding_all['name'].map(config.REGION_MAP)
-    
-    # Select final columns
-    homebuilding_all = homebuilding_all[['name', 'date', 'total', '1 unit', '2 units', 
-                                          '3 and 4 units', '5 units or more', 'multi_total',
-                                          'population', 'lat', 'lng', 'region']]
-    
-    # Save
-    homebuilding_all.to_csv(config.HOMEBUILDING_MOST_RECENT_ALL, index=False)
-    print(f"    ✓ Saved to: {config.HOMEBUILDING_MOST_RECENT_ALL}")
-    print(f"      Rows: {len(homebuilding_all)}, Metros: {homebuilding_all['name'].nunique()}")
-    print(f"      Date: {most_recent_date}")
-    
-    return homebuilding_all
 
 def create_final_merged_datasets(zori_metro_long, homebuilding):
     """Create final merged datasets with most recent data."""
@@ -261,10 +287,10 @@ def merge_and_finalize():
     print(f"    - All metros: {homebuilding_raw_all['Name'].nunique()}")
     print(f"    - Top 50 metros: {homebuilding_raw_top['Name'].nunique()}\n")
     
-    # Process each dataset - use top 50 for the main processing
+    # Process each dataset
     print("Processing datasets...")
     homebuilding = process_homebuilding_data(homebuilding_raw_top, metros_pop, top_metros)
-    homebuilding_all = create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities)  # NEW LINE
+    homebuilding_all = create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities)
     zori_county_clean = process_zillow_county_data(zori_county_wide)
     zori_metro_long = process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros)
     print()
@@ -275,7 +301,7 @@ def merge_and_finalize():
     print(f"\n✓ Data merge and finalization complete!")
     print(f"\nFinal outputs:")
     print(f"  - {config.HOMEBUILDING_CLEAN}")
-    print(f"  - {config.HOMEBUILDING_MOST_RECENT_ALL}")  # NEW LINE
+    print(f"  - {config.HOMEBUILDING_MOST_RECENT_ALL}")
     print(f"  - {config.ZORI_COUNTY_CLEAN}")
     print(f"  - {config.ZORI_METRO_LONG}")
     print(f"  - {config.ZORI_METRO_MOST_RECENT}")
