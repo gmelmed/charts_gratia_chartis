@@ -71,6 +71,13 @@ if __name__ == "__main__":
     # Rename S&P 500 close column for clarity
     sp500_df = sp500_df[["date", "close"]].rename(columns={"close": "SP500"})
     
+    # add recent values to umcsent_df
+    umcsent_recent = pd.DataFrame({
+        "date": pd.to_datetime(["2025-10-01", "2025-11-01"]),
+        "UMCSENT": [53.6, 50.3]
+    })
+    umcsent_df = pd.concat([umcsent_df, umcsent_recent], ignore_index=True)
+    
     # Merge on date
     merged_df = pd.merge(sp500_df, umcsent_df, on="date", how="inner")
     
