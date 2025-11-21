@@ -102,7 +102,7 @@ if __name__ == "__main__":
     merged_df = sp500_df.merge(umcsent_df[["date", "UMCSENT"]], on="date", how="inner")
     merged_df = merged_df.merge(dow_df[["date", "close"]].rename(columns={"close": "DJIA"}), on="date", how="inner")
     merged_df = merged_df.merge(nasdaq_df[["date", "close"]].rename(columns={"close": "NASDAQCOM"}), on="date", how="inner")
-    merged_df = merged_df.merge(MAGS_df[["date", "close"]].rename(columns={"close": "MAGS"}), on="date", how="inner")
+    merged_df = merged_df.merge(MAGS_df[["date", "close"]].rename(columns={"close": "MAGS"}), on="date", how="left")
     
     # Sort by date
     merged_df = merged_df.sort_values("date")
