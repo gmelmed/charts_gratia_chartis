@@ -74,11 +74,18 @@ if __name__ == "__main__":
         save_path=RAW_DATA_DIR / "NASDAQCOM.csv"
     )
     
+    # AI stocks ETF (e.g., Global X Artificial Intelligence & Technology ETF)
+    aiq_df = get_monthly_stock_data(
+        "AIQ",  # AI stocks ETF ticker
+        save_path=RAW_DATA_DIR / "AIQ.csv"
+    )
+    
     # Read the saved files
     sp500_df = pd.read_csv(RAW_DATA_DIR / "GSPC.csv", parse_dates=["date"])
     dow_df = pd.read_csv(RAW_DATA_DIR / "DJIA.csv", parse_dates=["date"])
     nasdaq_df = pd.read_csv(RAW_DATA_DIR / "NASDAQCOM.csv", parse_dates=["date"])
     umcsent_df = pd.read_csv(RAW_DATA_DIR / "UMCSENT.csv", parse_dates=["date"])
+    aiq_df = pd.read_csv(RAW_DATA_DIR / "AIQ.csv", parse_dates=["date"])
     
     
     # Rename S&P 500 close column for clarity
@@ -95,6 +102,7 @@ if __name__ == "__main__":
     merged_df = sp500_df.merge(umcsent_df[["date", "UMCSENT"]], on="date", how="inner")
     merged_df = merged_df.merge(dow_df[["date", "close"]].rename(columns={"close": "DJIA"}), on="date", how="inner")
     merged_df = merged_df.merge(nasdaq_df[["date", "close"]].rename(columns={"close": "NASDAQCOM"}), on="date", how="inner")
+    merged_df = merged_df.merge(aiq_df[["date", "close"]].rename(columns={"close": "AIQ"}), on="date", how="inner")
     
     # Sort by date
     merged_df = merged_df.sort_values("date")
@@ -104,6 +112,7 @@ if __name__ == "__main__":
     merged_df["UMCSENT_yoy_change"] = merged_df["UMCSENT"].pct_change(periods=12) * 100
     merged_df["DJIA_yoy_change"] = merged_df["DJIA"].pct_change(periods=12) * 100
     merged_df["NASDAQCOM_yoy_change"] = merged_df["NASDAQCOM"].pct_change(periods=12) * 100
+    merged_df["AIQ_yoy_change"] = merged_df["AIQ"].pct_change(periods=12) * 100
     
     
     # Create processed directory if needed
