@@ -54,7 +54,7 @@ if __name__ == "__main__":
     merged_df["UMCSENT_yoy_change"] = merged_df["UMCSENT"].pct_change(periods=12) * 100
     
     # record the difference between the two yoy changes
-    merged_df["yoy_change_diff"] = merged_df["NASDAQCOM_yoy_change"] - merged_df["UMCSENT_yoy_change"]
+    merged_df["yoy_change_diff"] = merged_df["UMCSENT_yoy_change"] - merged_df["NASDAQCOM_yoy_change"]
     
     # Create processed directory if needed
     PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
