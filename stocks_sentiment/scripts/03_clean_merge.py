@@ -114,6 +114,13 @@ if __name__ == "__main__":
     merged_df["NASDAQCOM_yoy_change"] = merged_df["NASDAQCOM"].pct_change(periods=12) * 100
     merged_df["AIQ_yoy_change"] = merged_df["AIQ"].pct_change(periods=12) * 100
     
+    # calculate a 12-month moving average for all yoy changes
+    merged_df["SP500_yoy_change_ma12"] = merged_df["SP500_yoy_change"].rolling(window=12).mean()
+    merged_df["UMCSENT_yoy_change_ma12"] = merged_df["UMCSENT_yoy_change"].rolling(window=12).mean()
+    merged_df["DJIA_yoy_change_ma12"] = merged_df["DJIA_yoy_change"].rolling(window=12).mean()
+    merged_df["NASDAQCOM_yoy_change_ma12"] = merged_df["NASDAQCOM_yoy_change"].rolling(window=12).mean()
+    merged_df["AIQ_yoy_change_ma12"] = merged_df["AIQ_yoy_change"].rolling(window=12).mean()
+    
     
     # Create processed directory if needed
     PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
