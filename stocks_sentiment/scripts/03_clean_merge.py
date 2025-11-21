@@ -64,9 +64,22 @@ if __name__ == "__main__":
         save_path=RAW_DATA_DIR / "GSPC.csv"
     )
     
+    dow_df = get_monthly_stock_data(
+        "^DJI",  # Dow Jones Industrial Average ticker
+        save_path=RAW_DATA_DIR / "DJIA.csv"
+    )
+    
+    nasdaq_df = get_monthly_stock_data(
+        "^IXIC",  # NASDAQ Composite ticker
+        save_path=RAW_DATA_DIR / "NASDAQCOM.csv"
+    )
+    
     # Read the saved files
     sp500_df = pd.read_csv(RAW_DATA_DIR / "GSPC.csv", parse_dates=["date"])
+    dow_df = pd.read_csv(RAW_DATA_DIR / "DJIA.csv", parse_dates=["date"])
+    nasdaq_df = pd.read_csv(RAW_DATA_DIR / "NASDAQCOM.csv", parse_dates=["date"])
     umcsent_df = pd.read_csv(RAW_DATA_DIR / "UMCSENT.csv", parse_dates=["date"])
+    
     
     # Rename S&P 500 close column for clarity
     sp500_df = sp500_df[["date", "close"]].rename(columns={"close": "SP500"})
@@ -78,8 +91,10 @@ if __name__ == "__main__":
     })
     umcsent_df = pd.concat([umcsent_df, umcsent_recent], ignore_index=True)
     
-    # Merge on date
-    merged_df = pd.merge(sp500_df, umcsent_df, on="date", how="inner")
+    # Merge all dataframes on date
+    merged_df = sp500_df.merge(umcsent_df[["date", "UMCSENT"]], on="date", how="inner")
+    merged_df = merged_df.merge(dow_df[["date", "close"]].rename(columns={"close": "DJIA"}), on="date", how="inner")
+    merged_df = merged_df.merge(nasdaq_df[["date", "close"]].rename(columns={"close": "NASDAQCOM"}), on="date", how="inner")
     
     # Sort by date
     merged_df = merged_df.sort_values("date")
@@ -87,15 +102,15 @@ if __name__ == "__main__":
     # Calculate YoY changes
     merged_df["SP500_yoy_change"] = merged_df["SP500"].pct_change(periods=12) * 100
     merged_df["UMCSENT_yoy_change"] = merged_df["UMCSENT"].pct_change(periods=12) * 100
+    merged_df["DJIA_yoy_change"] = merged_df["DJIA"].pct_change(periods=12) * 100
+    merged_df["NASDAQCOM_yoy_change"] = merged_df["NASDAQCOM"].pct_change(periods=12) * 100
     
-    # Calculate the difference (sentiment minus stock market)
-    merged_df["yoy_change_diff"] = merged_df["UMCSENT_yoy_change"] - merged_df["SP500_yoy_change"]
     
     # Create processed directory if needed
     PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
     
     # Save merged data
-    output_path = PROCESSED_DATA_DIR / "merged_sp500_umcsent.csv"
+    output_path = PROCESSED_DATA_DIR / "sentiment_stocks_clean.csv"
     merged_df.to_csv(output_path, index=False)
     print(f"\nMerged data saved to {output_path}")
     print(f"Date range: {merged_df['date'].min()} to {merged_df['date'].max()}")
