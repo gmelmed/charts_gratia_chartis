@@ -269,14 +269,21 @@ def create_final_merged_datasets(zori_metro_long, homebuilding):
 
 
 def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, homebuilding):
-    """Create a wide format dataset with multi_rt_pc values for each month as columns."""
+    """Create a wide format dataset with multi_rt_pc values for each month as columns (last 12 months only)."""
     print("  Creating wide format homebuilding timeseries...")
 
     # Ensure date is datetime
     homebuilding['date'] = pd.to_datetime(homebuilding['date'])
 
+    # Get most recent date and filter to last 12 months
+    most_recent_date = homebuilding['date'].max()
+    one_year_ago = most_recent_date - pd.DateOffset(months=12)
+
+    # Filter homebuilding data to last 12 months
+    homebuilding_last_year = homebuilding[homebuilding['date'] > one_year_ago].copy()
+
     # Pivot the homebuilding data to get multi_rt_pc for each date
-    homebuilding_pivot = homebuilding.pivot(
+    homebuilding_pivot = homebuilding_last_year.pivot(
         index='name',
         columns='date',
         values='multi_rt_pc'
@@ -302,6 +309,7 @@ def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, hom
     print(f"    ✓ Saved to: {output_path}")
     print(f"      Rows: {len(zori_homebuilding_wide)}, Metros: {zori_homebuilding_wide['name'].nunique()}")
     print(f"      Date columns: {len([c for c in zori_homebuilding_wide.columns if c[0].isdigit()])}")
+    print(f"      Date range: {one_year_ago.strftime('%Y-%m-%d')} to {most_recent_date.strftime('%Y-%m-%d')}")
 
     return zori_homebuilding_wide
 
