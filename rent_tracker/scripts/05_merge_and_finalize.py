@@ -223,48 +223,87 @@ def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
 def create_final_merged_datasets(zori_metro_long, homebuilding):
     """Create final merged datasets with most recent data."""
     print("  Creating final merged datasets...")
-    
+
     # Ensure date columns are the same type for merging
     zori_metro_long['date'] = pd.to_datetime(zori_metro_long['date'])
     homebuilding['date'] = pd.to_datetime(homebuilding['date'])
-    
+
     # Get most recent dates
-    most_recent_date = zori_metro_long['date'].max()
+    most_recent_zori_date = zori_metro_long['date'].max()
     most_recent_homebuilding_date = homebuilding['date'].max()
-    
-    # Create most recent datasets
-    zori_metro_most_recent = zori_metro_long[zori_metro_long['date'] == most_recent_date].copy()
-    zori_metro_building_most_recent = zori_metro_long[zori_metro_long['date'] == most_recent_homebuilding_date].copy()
-    
-    # Filter homebuilding to just the most recent date for each merge
-    homebuilding_for_most_recent = homebuilding[homebuilding['date'] == most_recent_date].copy()
-    homebuilding_for_building_recent = homebuilding[homebuilding['date'] == most_recent_homebuilding_date].copy()
-    
-    # Merge with homebuilding data on BOTH name and date
-    zori_metro_most_recent = pd.merge(
-        zori_metro_most_recent, 
-        homebuilding_for_most_recent, 
-        on=['name', 'date'],
-        how='left', 
-        suffixes=('_zori', '_homebuilding')
-    )
-    
-    zori_metro_building_most_recent = pd.merge(
-        zori_metro_building_most_recent, 
-        homebuilding_for_building_recent, 
-        on=['name', 'date'],
-        how='left', 
-        suffixes=('_zori', '_homebuilding')
-    )
-    
-    # Save final datasets
+
+    # Create most recent ZORI dataset (without homebuilding)
+    zori_metro_most_recent = zori_metro_long[zori_metro_long['date'] == most_recent_zori_date].copy()
+
+    # Save ZORI-only most recent dataset
     zori_metro_most_recent.to_csv(config.ZORI_METRO_MOST_RECENT, index=False)
     print(f"    ✓ Saved to: {config.ZORI_METRO_MOST_RECENT}")
     print(f"      Rows: {len(zori_metro_most_recent)}, Metros: {zori_metro_most_recent['name'].nunique()}")
-    
-    zori_metro_building_most_recent.to_csv(config.ZORI_METRO_BUILDING_MOST_RECENT, index=False)
+
+    # Create ZORI + Homebuilding merged dataset with most recent homebuilding data
+    # Filter ZORI to just metros that have homebuilding data at the most recent homebuilding date
+    zori_at_homebuilding_date = zori_metro_long[zori_metro_long['date'] == most_recent_homebuilding_date].copy()
+    homebuilding_most_recent = homebuilding[homebuilding['date'] == most_recent_homebuilding_date].copy()
+
+    # Merge on name only (since we've already filtered both to the same date)
+    zori_metro_homebuilding_most_recent = pd.merge(
+        zori_at_homebuilding_date,
+        homebuilding_most_recent,
+        on='name',
+        how='inner',  # Only keep metros that have both ZORI and homebuilding data
+        suffixes=('_zori', '_homebuilding')
+    )
+
+    # Rename date columns to be more descriptive
+    zori_metro_homebuilding_most_recent.rename(columns={
+        'date_zori': 'date_zori',
+        'date_homebuilding': 'date_homebuilding'
+    }, inplace=True)
+
+    # Save merged dataset
+    zori_metro_homebuilding_most_recent.to_csv(config.ZORI_METRO_BUILDING_MOST_RECENT, index=False)
     print(f"    ✓ Saved to: {config.ZORI_METRO_BUILDING_MOST_RECENT}")
-    print(f"      Rows: {len(zori_metro_building_most_recent)}, Metros: {zori_metro_building_most_recent['name'].nunique()}")
+    print(f"      Rows: {len(zori_metro_homebuilding_most_recent)}, Metros: {zori_metro_homebuilding_most_recent['name'].nunique()}")
+
+    return zori_metro_homebuilding_most_recent
+
+
+def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, homebuilding):
+    """Create a wide format dataset with multi_rt_pc values for each month as columns."""
+    print("  Creating wide format homebuilding timeseries...")
+
+    # Ensure date is datetime
+    homebuilding['date'] = pd.to_datetime(homebuilding['date'])
+
+    # Pivot the homebuilding data to get multi_rt_pc for each date
+    homebuilding_pivot = homebuilding.pivot(
+        index='name',
+        columns='date',
+        values='multi_rt_pc'
+    )
+
+    # Convert column names (dates) to string format YYYY-MM-DD
+    homebuilding_pivot.columns = homebuilding_pivot.columns.strftime('%Y-%m-%d')
+
+    # Reset index to make 'name' a column again
+    homebuilding_pivot = homebuilding_pivot.reset_index()
+
+    # Merge with the zori_metro_homebuilding_most_recent data
+    zori_homebuilding_wide = pd.merge(
+        zori_metro_homebuilding_most_recent,
+        homebuilding_pivot,
+        on='name',
+        how='left'
+    )
+
+    # Save the wide format dataset
+    output_path = config.PROCESSED_DATA_DIR + 'zori_metro_homebuilding_timeseries_wide.csv'
+    zori_homebuilding_wide.to_csv(output_path, index=False)
+    print(f"    ✓ Saved to: {output_path}")
+    print(f"      Rows: {len(zori_homebuilding_wide)}, Metros: {zori_homebuilding_wide['name'].nunique()}")
+    print(f"      Date columns: {len([c for c in zori_homebuilding_wide.columns if c[0].isdigit()])}")
+
+    return zori_homebuilding_wide
 
 
 def merge_and_finalize():
@@ -296,8 +335,11 @@ def merge_and_finalize():
     print()
     
     # Create final merged datasets
-    create_final_merged_datasets(zori_metro_long, homebuilding)
-    
+    zori_metro_homebuilding_most_recent = create_final_merged_datasets(zori_metro_long, homebuilding)
+
+    # Create wide format timeseries dataset
+    create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, homebuilding)
+
     print(f"\n✓ Data merge and finalization complete!")
     print(f"\nFinal outputs:")
     print(f"  - {config.HOMEBUILDING_CLEAN}")
@@ -306,6 +348,7 @@ def merge_and_finalize():
     print(f"  - {config.ZORI_METRO_LONG}")
     print(f"  - {config.ZORI_METRO_MOST_RECENT}")
     print(f"  - {config.ZORI_METRO_BUILDING_MOST_RECENT}")
+    print(f"  - {config.PROCESSED_DATA_DIR}zori_metro_homebuilding_timeseries_wide.csv")
 
 
 if __name__ == "__main__":
