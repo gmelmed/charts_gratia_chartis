@@ -277,7 +277,7 @@ def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, hom
 
     # Get most recent date and filter to last 12 months
     most_recent_date = homebuilding['date'].max()
-    one_year_ago = most_recent_date - pd.DateOffset(months=12)
+    one_year_ago = most_recent_date - pd.DateOffset(months=24)
 
     # Filter homebuilding data to last 12 months
     homebuilding_last_year = homebuilding[homebuilding['date'] > one_year_ago].copy()
