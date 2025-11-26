@@ -269,7 +269,7 @@ def create_final_merged_datasets(zori_metro_long, homebuilding):
 
 
 def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, homebuilding):
-    """Create a wide format dataset with multi_rt_pc values for each month as columns (last 12 months only)."""
+    """Create a wide format dataset with rt_pc values for each month as columns (last 12 months only)."""
     print("  Creating wide format homebuilding timeseries...")
 
     # Ensure date is datetime
@@ -282,11 +282,11 @@ def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, hom
     # Filter homebuilding data to last 12 months
     homebuilding_last_year = homebuilding[homebuilding['date'] > one_year_ago].copy()
 
-    # Pivot the homebuilding data to get multi_rt_pc for each date
+    # Pivot the homebuilding data to get rt_pc for each date
     homebuilding_pivot = homebuilding_last_year.pivot(
         index='name',
         columns='date',
-        values='multi_rt_pc'
+        values='rt_pc'
     )
 
     # Convert column names (dates) to string format YYYY-MM-DD
