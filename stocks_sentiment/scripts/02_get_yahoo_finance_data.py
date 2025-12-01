@@ -14,22 +14,30 @@ def get_monthly_stock_data(ticker, start_date=None, end_date=None, save_path=Non
     print(f"Fetching data for {ticker} from {sd_text} to {ed_text}...")
     
     # Download historical data
-    # period="max" gets all available data
+    # Use daily data and resample to get the last day of each month
     ticker_obj = yf.Ticker(ticker)
-    df = ticker_obj.history(period="max", interval="1mo", start=start_date, end=end_date)
-    
+    df = ticker_obj.history(period="max", interval="1d", start=start_date, end=end_date)
+
     if df.empty:
         raise ValueError(f"No data returned for ticker {ticker}")
-    
+
     # Reset index to have date as a column
     df.reset_index(inplace=True)
-    
+
     # Rename Date to date (lowercase for consistency)
     df.rename(columns={'Date': 'date'}, inplace=True)
-    
-    # Convert date to datetime and keep only the date part
-    df['date'] = pd.to_datetime(df['date']).dt.date
+
+    # Convert date to datetime
     df['date'] = pd.to_datetime(df['date'])
+
+    # Set date as index for resampling
+    df.set_index('date', inplace=True)
+
+    # Resample to monthly frequency, taking the last value of each month
+    df = df.resample('ME').last()
+
+    # Reset index to have date as a column again
+    df.reset_index(inplace=True)
     
     # Keep only relevant columns and lowercase them
     df.columns = df.columns.str.lower()

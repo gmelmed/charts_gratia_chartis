@@ -7,7 +7,7 @@ def get_fred_series(series_id, api_key=None, save_dir=None, prompt_for_key=False
     """
     Fetch a FRED series and return a DataFrame with columns: date, <series_id>.
     Saves CSV named "<series_id>.csv" in save_dir (defaults to stocks_sentiment/data/raw).
-    Resamples to first of month and fetches maximum available history.
+    Resamples to last day of month and fetches maximum available history.
     """
     # resolve paths relative to this script
     script_dir = Path(__file__).resolve().parent
@@ -48,10 +48,10 @@ def get_fred_series(series_id, api_key=None, save_dir=None, prompt_for_key=False
     df = df.set_index("date")
     df.index = pd.to_datetime(df.index)
     df["value"] = pd.to_numeric(df["value"], errors="coerce")
-    
-    # Resample to first of month, taking the first available value
-    df_monthly = df[["value"]].resample('MS').first()
-    
+
+    # Resample to last day of month, taking the last available value
+    df_monthly = df[["value"]].resample('ME').last()
+
     # Drop any rows with NaN values
     df_monthly = df_monthly.dropna()
     

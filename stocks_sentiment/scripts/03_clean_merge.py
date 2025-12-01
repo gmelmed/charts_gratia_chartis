@@ -63,46 +63,31 @@ if __name__ == "__main__":
         "^GSPC",  # S&P 500 ticker
         save_path=RAW_DATA_DIR / "GSPC.csv"
     )
-    
-    dow_df = get_monthly_stock_data(
-        "^DJI",  # Dow Jones Industrial Average ticker
-        save_path=RAW_DATA_DIR / "DJIA.csv"
-    )
-    
-    nasdaq_df = get_monthly_stock_data(
-        "^IXIC",  # NASDAQ Composite ticker
-        save_path=RAW_DATA_DIR / "NASDAQCOM.csv"
-    )
-    
-    # AI stocks ETF (e.g., Global X Artificial Intelligence & Technology ETF)
-    AIQ_df = get_monthly_stock_data(
-        "AIQ",  # AI stocks ETF ticker
-        save_path=RAW_DATA_DIR / "AIQ.csv"
-    )
-    
+
     # Read the saved files
-    sp500_df = pd.read_csv(RAW_DATA_DIR / "GSPC.csv", parse_dates=["date"])
-    dow_df = pd.read_csv(RAW_DATA_DIR / "DJIA.csv", parse_dates=["date"])
-    nasdaq_df = pd.read_csv(RAW_DATA_DIR / "NASDAQCOM.csv", parse_dates=["date"])
-    umcsent_df = pd.read_csv(RAW_DATA_DIR / "UMCSENT.csv", parse_dates=["date"])
-    AIQ_df = pd.read_csv(RAW_DATA_DIR / "AIQ.csv", parse_dates=["date"])
-    
-    
+    sp500_df = pd.read_csv(RAW_DATA_DIR / "GSPC.csv")
+    umcsent_df = pd.read_csv(RAW_DATA_DIR / "UMCSENT.csv")
+
+    # Convert date columns to datetime and remove timezone from S&P 500 dates
+    sp500_df['date'] = pd.to_datetime(sp500_df['date'], utc=True).dt.tz_localize(None)
+    umcsent_df['date'] = pd.to_datetime(umcsent_df['date'])
+
+    # Normalize both to the first day of the month
+    sp500_df['date'] = sp500_df['date'].dt.to_period('M').dt.to_timestamp()
+    umcsent_df['date'] = umcsent_df['date'].dt.to_period('M').dt.to_timestamp()
+
     # Rename S&P 500 close column for clarity
     sp500_df = sp500_df[["date", "close"]].rename(columns={"close": "SP500"})
     
     # add recent values to umcsent_df
     umcsent_recent = pd.DataFrame({
-        "date": pd.to_datetime(["2025-10-01", "2025-11-01"]),
-        "UMCSENT": [53.6, 50.3]
+        "date": pd.to_datetime(["2025-10-01"]),
+        "UMCSENT": [50.3]
     })
     umcsent_df = pd.concat([umcsent_df, umcsent_recent], ignore_index=True)
     
     # Merge all dataframes on date
     merged_df = sp500_df.merge(umcsent_df[["date", "UMCSENT"]], on="date", how="inner")
-    merged_df = merged_df.merge(dow_df[["date", "close"]].rename(columns={"close": "DJIA"}), on="date", how="inner")
-    merged_df = merged_df.merge(nasdaq_df[["date", "close"]].rename(columns={"close": "NASDAQCOM"}), on="date", how="inner")
-    merged_df = merged_df.merge(AIQ_df[["date", "close"]].rename(columns={"close": "AIQ"}), on="date", how="left")
     
     # Sort by date
     merged_df = merged_df.sort_values("date")
@@ -110,16 +95,10 @@ if __name__ == "__main__":
     # Calculate YoY changes
     merged_df["SP500_yoy_change"] = merged_df["SP500"].pct_change(periods=12) * 100
     merged_df["UMCSENT_yoy_change"] = merged_df["UMCSENT"].pct_change(periods=12) * 100
-    merged_df["DJIA_yoy_change"] = merged_df["DJIA"].pct_change(periods=12) * 100
-    merged_df["NASDAQCOM_yoy_change"] = merged_df["NASDAQCOM"].pct_change(periods=12) * 100
-    merged_df["AIQ_yoy_change"] = merged_df["AIQ"].pct_change(periods=12) * 100
-    
+
     # calculate a 12-month moving average for all yoy changes
     merged_df["SP500_yoy_change_ma12"] = merged_df["SP500_yoy_change"].rolling(window=12).mean()
     merged_df["UMCSENT_yoy_change_ma12"] = merged_df["UMCSENT_yoy_change"].rolling(window=12).mean()
-    merged_df["DJIA_yoy_change_ma12"] = merged_df["DJIA_yoy_change"].rolling(window=12).mean()
-    merged_df["NASDAQCOM_yoy_change_ma12"] = merged_df["NASDAQCOM_yoy_change"].rolling(window=12).mean()
-    merged_df["AIQ_yoy_change_ma12"] = merged_df["AIQ_yoy_change"].rolling(window=12).mean()
     
     
     # Create processed directory if needed
