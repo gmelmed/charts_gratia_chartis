@@ -127,22 +127,20 @@ def create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities
 def process_zillow_county_data(zori_county_wide):
     """Process Zillow county data to calculate changes."""
     print("  Processing Zillow county data...")
-    
+
     # Get date columns
     date_cols = [col for col in zori_county_wide.columns if col not in ['fips', 'region_name']]
     date_cols_dt = pd.to_datetime(date_cols)
-    
+
     most_recent_date = date_cols_dt.max()
     most_recent_col = most_recent_date.strftime('%Y-%m-%d')
-    
-    # Calculate one-year and five-year changes
+
+    # Calculate one-year change
     one_year_date = most_recent_date - pd.DateOffset(years=1)
-    five_year_date = most_recent_date - pd.DateOffset(years=5)
-    
-    # Find the closest matching columns for these dates
+
+    # Find the closest matching column for this date
     one_year_col = min(date_cols, key=lambda x: abs(pd.to_datetime(x) - one_year_date))
-    five_year_col = min(date_cols, key=lambda x: abs(pd.to_datetime(x) - five_year_date))
-    
+
     # Create the new dataframe
     zori_county_clean = pd.DataFrame({
         'region_name': zori_county_wide['region_name'],
@@ -151,22 +149,18 @@ def process_zillow_county_data(zori_county_wide):
         'most_recent_value': zori_county_wide[most_recent_col],
         'one_year_date': pd.to_datetime(one_year_col),
         'one_year_value': zori_county_wide[one_year_col],
-        'one_year_change': ((zori_county_wide[most_recent_col] - zori_county_wide[one_year_col]) / 
-                            zori_county_wide[one_year_col] * 100),
-        'five_year_date': pd.to_datetime(five_year_col),
-        'five_year_value': zori_county_wide[five_year_col],
-        'five_year_change': ((zori_county_wide[most_recent_col] - zori_county_wide[five_year_col]) / 
-                             zori_county_wide[five_year_col] * 100)
+        'one_year_change': ((zori_county_wide[most_recent_col] - zori_county_wide[one_year_col]) /
+                            zori_county_wide[one_year_col] * 100)
     })
-    
+
     # Ensure proper data types
     zori_county_clean['fips'] = zori_county_clean['fips'].astype(int)
     zori_county_clean['region_name'] = zori_county_clean['region_name'].astype(str)
-    
+
     # Save to csv
     zori_county_clean.to_csv(config.ZORI_COUNTY_CLEAN, index=False)
     print(f"    ✓ Saved to: {config.ZORI_COUNTY_CLEAN}")
-    
+
     return zori_county_clean
 
 
@@ -192,20 +186,17 @@ def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
     
     zori_metro_long = zori_metro_long[['RegionName', 'date', 'zori']]
     zori_metro_long.rename(columns={'RegionName': 'name'}, inplace=True)
-    
-    # Merge with cities to get lat/lon/population
-    zori_metro_long = pd.merge(zori_metro_long, cities, on='name', how='left')
-    
-    # Calculate 1-year and 5-year changes
+
+    # Merge with cities to get lat/lon (excluding population as it will come from metros_pop)
+    zori_metro_long = pd.merge(zori_metro_long, cities[['name', 'lat', 'lng']], on='name', how='left')
+
+    # Calculate 1-year change
     zori_metro_long = zori_metro_long.sort_values(by=['name', 'date'])
     zori_metro_long['one_year_change'] = (zori_metro_long.groupby('name')['zori']
                                            .pct_change(periods=12, fill_method=None) * 100)
-    zori_metro_long['five_year_change'] = (zori_metro_long.groupby('name')['zori']
-                                            .pct_change(periods=60, fill_method=None) * 100)
-    
-    # Save the date of one year and five year comparisons
+
+    # Save the date of one year comparison
     zori_metro_long['one_year_date'] = zori_metro_long['date'] - pd.DateOffset(years=1)
-    zori_metro_long['five_year_date'] = zori_metro_long['date'] - pd.DateOffset(years=5)
     
     # Filter to top metros
     zori_metro_long = zori_metro_long[zori_metro_long['name'].isin(top_metros)]
@@ -219,6 +210,51 @@ def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
     
     return zori_metro_long
 
+def process_zillow_affordability_data(zori_affordability_wide, cities, metros_pop, top_metros):
+    """Process Zillow metro affordability data into long format with changes."""
+    print("  Processing Zillow metro affordability data...")
+    
+    index_cols = ['RegionID', 'SizeRank', 'RegionName', 'RegionType', 'StateName']
+    
+    # Melt df
+    zori_affordability_long = pd.melt(
+        zori_affordability_wide,
+        id_vars=index_cols,
+        value_vars=[col for col in zori_affordability_wide.columns if col not in index_cols],
+        var_name="date",
+        value_name="affordability_index"
+    )
+    
+    zori_affordability_long['date'] = pd.to_datetime(zori_affordability_long['date'])
+    
+    # Increase date by one day
+    zori_affordability_long['date'] += pd.Timedelta(days=1)
+    
+    zori_affordability_long = zori_affordability_long[['RegionName', 'date', 'affordability_index']]
+    zori_affordability_long.rename(columns={'RegionName': 'name'}, inplace=True)
+
+    # Merge with cities to get lat/lon (excluding population as it will come from metros_pop)
+    zori_affordability_long = pd.merge(zori_affordability_long, cities[['name', 'lat', 'lng']], on='name', how='left')
+
+    # Calculate 1-year change (absolute difference)
+    zori_affordability_long = zori_affordability_long.sort_values(by=['name', 'date'])
+    zori_affordability_long['one_year_change'] = (zori_affordability_long.groupby('name')['affordability_index']
+                                           .diff(periods=12))
+
+    # Save the date of one year comparison
+    zori_affordability_long['one_year_date'] = zori_affordability_long['date'] - pd.DateOffset(years=1)
+    
+    # Filter to top metros
+    zori_affordability_long = zori_affordability_long[zori_affordability_long['name'].isin(top_metros)]
+    
+    # Merge with metros_pop
+    zori_affordability_long = pd.merge(zori_affordability_long, metros_pop, on='name', how='left')
+    
+    # Save long format data
+    zori_affordability_long.to_csv(config.ZORI_AFFORDABILITY_LONG, index=False)
+    print(f"    ✓ Saved to: {config.ZORI_AFFORDABILITY_LONG}")
+
+    return zori_affordability_long
 
 def create_final_merged_datasets(zori_metro_long, homebuilding):
     """Create final merged datasets with most recent data."""
@@ -314,6 +350,28 @@ def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, hom
     return zori_homebuilding_wide
 
 
+def create_affordability_most_recent(zori_affordability_long):
+    """Create most recent affordability dataset."""
+    print("  Creating most recent affordability dataset...")
+
+    # Ensure date column is datetime
+    zori_affordability_long['date'] = pd.to_datetime(zori_affordability_long['date'])
+
+    # Get most recent date
+    most_recent_date = zori_affordability_long['date'].max()
+
+    # Filter to most recent date
+    zori_affordability_most_recent = zori_affordability_long[zori_affordability_long['date'] == most_recent_date].copy()
+
+    # Save most recent affordability dataset
+    zori_affordability_most_recent.to_csv(config.ZORI_AFFORDABILITY_MOST_RECENT, index=False)
+    print(f"    ✓ Saved to: {config.ZORI_AFFORDABILITY_MOST_RECENT}")
+    print(f"      Rows: {len(zori_affordability_most_recent)}, Metros: {zori_affordability_most_recent['name'].nunique()}")
+    print(f"      Date: {most_recent_date}")
+
+    return zori_affordability_most_recent
+
+
 def merge_and_finalize():
     """Main function to merge all data and create final outputs."""
     print("Starting data merge and finalization...\n")
@@ -330,6 +388,7 @@ def merge_and_finalize():
     cities = pd.read_csv(config.CITIES_RAW)
     zori_county_wide = pd.read_csv(config.ZILLOW_COUNTY_RAW)
     zori_metro_wide = pd.read_csv(config.ZILLOW_METRO_RAW)
+    zori_affordability_wide = pd.read_csv(config.ZILLOW_AFFORDABILITY_RAW)
     print("  ✓ All raw data loaded")
     print(f"    - All metros: {homebuilding_raw_all['Name'].nunique()}")
     print(f"    - Top 50 metros: {homebuilding_raw_top['Name'].nunique()}\n")
@@ -340,13 +399,17 @@ def merge_and_finalize():
     homebuilding_all = create_homebuilding_most_recent_all(homebuilding_raw_all, metros_pop, cities)
     zori_county_clean = process_zillow_county_data(zori_county_wide)
     zori_metro_long = process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros)
+    zori_affordability_long = process_zillow_affordability_data(zori_affordability_wide, cities, metros_pop, top_metros)
     print()
-    
+
     # Create final merged datasets
     zori_metro_homebuilding_most_recent = create_final_merged_datasets(zori_metro_long, homebuilding)
 
     # Create wide format timeseries dataset
     create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, homebuilding)
+
+    # Create affordability most recent dataset
+    create_affordability_most_recent(zori_affordability_long)
 
     print(f"\n✓ Data merge and finalization complete!")
     print(f"\nFinal outputs:")
@@ -356,6 +419,8 @@ def merge_and_finalize():
     print(f"  - {config.ZORI_METRO_LONG}")
     print(f"  - {config.ZORI_METRO_MOST_RECENT}")
     print(f"  - {config.ZORI_METRO_BUILDING_MOST_RECENT}")
+    print(f"  - {config.ZORI_AFFORDABILITY_LONG}")
+    print(f"  - {config.ZORI_AFFORDABILITY_MOST_RECENT}")
     print(f"  - {config.PROCESSED_DATA_DIR}zori_metro_homebuilding_timeseries_wide.csv")
 
 

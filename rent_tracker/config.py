@@ -66,6 +66,7 @@ POPULATION_RAW = RAW_DATA_DIR + 'population.csv'
 CITIES_RAW = RAW_DATA_DIR + 'cities.csv'
 ZILLOW_COUNTY_RAW = RAW_DATA_DIR + 'zillow_county_raw.csv'
 ZILLOW_METRO_RAW = RAW_DATA_DIR + 'zillow_metro_raw.csv'
+ZILLOW_AFFORDABILITY_RAW = RAW_DATA_DIR + 'zillow_affordability_raw.csv'
 
 # Processed data output paths
 PROCESSED_DATA_DIR = 'data/processed/'     # CHANGED: removed rent_tracker/
@@ -75,6 +76,8 @@ ZORI_COUNTY_CLEAN = PROCESSED_DATA_DIR + 'zori_county_clean.csv'
 ZORI_METRO_LONG = PROCESSED_DATA_DIR + 'zori_metro_long.csv'
 ZORI_METRO_MOST_RECENT = PROCESSED_DATA_DIR + 'zori_metro_most_recent.csv'
 ZORI_METRO_BUILDING_MOST_RECENT = PROCESSED_DATA_DIR + 'zori_metro_homebuilding_most_recent.csv'
+ZORI_AFFORDABILITY_LONG = PROCESSED_DATA_DIR + 'zori_affordability_long.csv'
+ZORI_AFFORDABILITY_MOST_RECENT = PROCESSED_DATA_DIR + 'zori_affordability_most_recent.csv'
 
 # External data URLs
 CENSUS_BASE_URL_2024 = 'https://www.census.gov/construction/bps/xls/cbsamonthly_{}.xls'
@@ -82,6 +85,7 @@ CENSUS_BASE_URL_PRE2024 = 'https://www.census.gov/construction/bps/xls/msamonthl
 POPULATION_URL = "https://www2.census.gov/programs-surveys/popest/tables/2020-2024/metro/totals/cbsa-met-est2024-pop.xlsx"
 ZILLOW_COUNTY_URL = "https://files.zillowstatic.com/research/public_csvs/zori/County_zori_uc_sfrcondomfr_sm_month.csv?t=1734717130"
 ZILLOW_METRO_URL = "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_month.csv?t=1734717130"
+ZILLOW_AFFORDABILITY_URL = "https://files.zillowstatic.com/research/public_csvs/new_renter_affordability/Metro_new_renter_affordability_uc_sfrcondomfr_sm_sa_month.csv?t=1765129851"
 
 # Scraping parameters
 YEARS_BACK = 6

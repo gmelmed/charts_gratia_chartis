@@ -22,7 +22,24 @@ def collect_zillow_metro_data():
     print(f"\n✓ Zillow metro data collection complete!")
     print(f"  Metro areas: {len(zori_metro_wide)}")
     print(f"  Saved to: {config.ZILLOW_METRO_RAW}")
+    
+    
+def collect_zillow_affordability_data():
+    """Collect and process Zillow metro-level renter affordability data."""
+    print("Starting Zillow metro affordability data collection...")
+    
+    # Read in the affordability metro data
+    print(f"  Fetching data from: {config.ZILLOW_AFFORDABILITY_URL}")
+    affordability_metro_wide = pd.read_csv(config.ZILLOW_AFFORDABILITY_URL)
+    
+    # Save raw data
+    affordability_metro_wide.to_csv(config.ZILLOW_AFFORDABILITY_RAW, index=False)
+    
+    print(f"\n✓ Zillow metro affordability data collection complete!")
+    print(f"  Metro areas: {len(affordability_metro_wide)}")
+    print(f"  Saved to: {config.ZILLOW_AFFORDABILITY_RAW}")    
 
 
 if __name__ == "__main__":
     collect_zillow_metro_data()
+    collect_zillow_affordability_data()
