@@ -252,6 +252,9 @@ def create_final_merged_datasets(zori_metro_long, homebuilding):
     """Create final merged datasets with most recent data."""
     print("  Creating final merged datasets...")
 
+    # Ensure date columns are datetime
+    homebuilding['date'] = pd.to_datetime(homebuilding['date'])
+
     # Get most recent dates
     most_recent_zori_date = zori_metro_long['date'].max()
     most_recent_homebuilding_date = homebuilding['date'].max()
@@ -289,6 +292,9 @@ def create_final_merged_datasets(zori_metro_long, homebuilding):
 def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, homebuilding):
     """Create a wide format dataset with rt_pc values for each month as columns (last 12 months only)."""
     print("  Creating wide format homebuilding timeseries...")
+
+    # Ensure date is datetime
+    homebuilding['date'] = pd.to_datetime(homebuilding['date'])
 
     # Get most recent date and filter to last 12 months
     most_recent_date = homebuilding['date'].max()
