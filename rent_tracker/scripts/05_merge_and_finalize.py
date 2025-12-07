@@ -165,18 +165,20 @@ def process_zillow_county_data(zori_county_wide):
 
 
 def process_zillow_metro_generic(zillow_wide, cities, metros_pop, top_metros,
-                                  value_col_name, change_type, output_path, dataset_name):
+                                  value_col_name, change_type, output_path, dataset_name,
+                                  filter_to_top=True):
     """Generic function to process Zillow metro data into long format with changes.
 
     Args:
         zillow_wide: Wide format Zillow dataframe
         cities: Cities dataframe with lat/lng
         metros_pop: Population dataframe
-        top_metros: List of top metro names to filter
+        top_metros: List of top metro names to filter (only used if filter_to_top=True)
         value_col_name: Name for the value column (e.g., 'zori', 'affordability_index')
         change_type: 'pct' for percentage change, 'diff' for absolute difference
         output_path: Path to save the processed data
         dataset_name: Name for logging (e.g., 'Zillow metro', 'Zillow metro affordability')
+        filter_to_top: Whether to filter to top metros (default True)
     """
     print(f"  Processing {dataset_name} data...")
 
@@ -214,8 +216,9 @@ def process_zillow_metro_generic(zillow_wide, cities, metros_pop, top_metros,
     # Save the date of one year comparison
     data_long['one_year_date'] = data_long['date'] - pd.DateOffset(years=1)
 
-    # Filter to top metros
-    data_long = data_long[data_long['name'].isin(top_metros)]
+    # Filter to top metros (optional)
+    if filter_to_top:
+        data_long = data_long[data_long['name'].isin(top_metros)]
 
     # Save long format data
     data_long.to_csv(output_path, index=False)
@@ -239,13 +242,14 @@ def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
 
 
 def process_zillow_affordability_data(zori_affordability_wide, cities, metros_pop, top_metros):
-    """Process Zillow metro affordability data into long format with changes."""
+    """Process Zillow metro affordability data into long format with changes (all metros)."""
     return process_zillow_metro_generic(
         zori_affordability_wide, cities, metros_pop, top_metros,
         value_col_name='affordability_index',
         change_type='diff',
         output_path=config.ZORI_AFFORDABILITY_LONG,
-        dataset_name='Zillow metro affordability'
+        dataset_name='Zillow metro affordability',
+        filter_to_top=False  # Include all metros, not just top 50
     )
 
 def create_final_merged_datasets(zori_metro_long, homebuilding):
