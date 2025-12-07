@@ -164,105 +164,93 @@ def process_zillow_county_data(zori_county_wide):
     return zori_county_clean
 
 
-def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
-    """Process Zillow metro data into long format with changes."""
-    print("  Processing Zillow metro data...")
-    
+def process_zillow_metro_generic(zillow_wide, cities, metros_pop, top_metros,
+                                  value_col_name, change_type, output_path, dataset_name):
+    """Generic function to process Zillow metro data into long format with changes.
+
+    Args:
+        zillow_wide: Wide format Zillow dataframe
+        cities: Cities dataframe with lat/lng
+        metros_pop: Population dataframe
+        top_metros: List of top metro names to filter
+        value_col_name: Name for the value column (e.g., 'zori', 'affordability_index')
+        change_type: 'pct' for percentage change, 'diff' for absolute difference
+        output_path: Path to save the processed data
+        dataset_name: Name for logging (e.g., 'Zillow metro', 'Zillow metro affordability')
+    """
+    print(f"  Processing {dataset_name} data...")
+
     index_cols = ['RegionID', 'SizeRank', 'RegionName', 'RegionType', 'StateName']
-    
+
     # Melt df
-    zori_metro_long = pd.melt(
-        zori_metro_wide,
+    data_long = pd.melt(
+        zillow_wide,
         id_vars=index_cols,
-        value_vars=[col for col in zori_metro_wide.columns if col not in index_cols],
+        value_vars=[col for col in zillow_wide.columns if col not in index_cols],
         var_name="date",
-        value_name="zori"
+        value_name=value_col_name
     )
-    
-    zori_metro_long['date'] = pd.to_datetime(zori_metro_long['date'])
-    
+
+    data_long['date'] = pd.to_datetime(data_long['date'])
+
     # Increase date by one day
-    zori_metro_long['date'] += pd.Timedelta(days=1)
-    
-    zori_metro_long = zori_metro_long[['RegionName', 'date', 'zori']]
-    zori_metro_long.rename(columns={'RegionName': 'name'}, inplace=True)
+    data_long['date'] += pd.Timedelta(days=1)
+
+    data_long = data_long[['RegionName', 'date', value_col_name]]
+    data_long.rename(columns={'RegionName': 'name'}, inplace=True)
 
     # Merge with cities to get lat/lon (excluding population as it will come from metros_pop)
-    zori_metro_long = pd.merge(zori_metro_long, cities[['name', 'lat', 'lng']], on='name', how='left')
+    data_long = pd.merge(data_long, cities[['name', 'lat', 'lng']], on='name', how='left')
 
     # Calculate 1-year change
-    zori_metro_long = zori_metro_long.sort_values(by=['name', 'date'])
-    zori_metro_long['one_year_change'] = (zori_metro_long.groupby('name')['zori']
-                                           .pct_change(periods=12, fill_method=None) * 100)
+    data_long = data_long.sort_values(by=['name', 'date'])
+    if change_type == 'pct':
+        data_long['one_year_change'] = (data_long.groupby('name')[value_col_name]
+                                        .pct_change(periods=12, fill_method=None) * 100)
+    elif change_type == 'diff':
+        data_long['one_year_change'] = (data_long.groupby('name')[value_col_name]
+                                        .diff(periods=12))
 
     # Save the date of one year comparison
-    zori_metro_long['one_year_date'] = zori_metro_long['date'] - pd.DateOffset(years=1)
-    
+    data_long['one_year_date'] = data_long['date'] - pd.DateOffset(years=1)
+
     # Filter to top metros
-    zori_metro_long = zori_metro_long[zori_metro_long['name'].isin(top_metros)]
-    
+    data_long = data_long[data_long['name'].isin(top_metros)]
+
     # Save long format data
-    zori_metro_long.to_csv(config.ZORI_METRO_LONG, index=False)
-    print(f"    ✓ Saved to: {config.ZORI_METRO_LONG}")
-    
+    data_long.to_csv(output_path, index=False)
+    print(f"    ✓ Saved to: {output_path}")
+
     # Merge with metros_pop
-    zori_metro_long = pd.merge(zori_metro_long, metros_pop, on='name', how='left')
-    
-    return zori_metro_long
+    data_long = pd.merge(data_long, metros_pop, on='name', how='left')
+
+    return data_long
+
+
+def process_zillow_metro_data(zori_metro_wide, cities, metros_pop, top_metros):
+    """Process Zillow metro data into long format with changes."""
+    return process_zillow_metro_generic(
+        zori_metro_wide, cities, metros_pop, top_metros,
+        value_col_name='zori',
+        change_type='pct',
+        output_path=config.ZORI_METRO_LONG,
+        dataset_name='Zillow metro'
+    )
+
 
 def process_zillow_affordability_data(zori_affordability_wide, cities, metros_pop, top_metros):
     """Process Zillow metro affordability data into long format with changes."""
-    print("  Processing Zillow metro affordability data...")
-    
-    index_cols = ['RegionID', 'SizeRank', 'RegionName', 'RegionType', 'StateName']
-    
-    # Melt df
-    zori_affordability_long = pd.melt(
-        zori_affordability_wide,
-        id_vars=index_cols,
-        value_vars=[col for col in zori_affordability_wide.columns if col not in index_cols],
-        var_name="date",
-        value_name="affordability_index"
+    return process_zillow_metro_generic(
+        zori_affordability_wide, cities, metros_pop, top_metros,
+        value_col_name='affordability_index',
+        change_type='diff',
+        output_path=config.ZORI_AFFORDABILITY_LONG,
+        dataset_name='Zillow metro affordability'
     )
-    
-    zori_affordability_long['date'] = pd.to_datetime(zori_affordability_long['date'])
-    
-    # Increase date by one day
-    zori_affordability_long['date'] += pd.Timedelta(days=1)
-    
-    zori_affordability_long = zori_affordability_long[['RegionName', 'date', 'affordability_index']]
-    zori_affordability_long.rename(columns={'RegionName': 'name'}, inplace=True)
-
-    # Merge with cities to get lat/lon (excluding population as it will come from metros_pop)
-    zori_affordability_long = pd.merge(zori_affordability_long, cities[['name', 'lat', 'lng']], on='name', how='left')
-
-    # Calculate 1-year change (absolute difference)
-    zori_affordability_long = zori_affordability_long.sort_values(by=['name', 'date'])
-    zori_affordability_long['one_year_change'] = (zori_affordability_long.groupby('name')['affordability_index']
-                                           .diff(periods=12))
-
-    # Save the date of one year comparison
-    zori_affordability_long['one_year_date'] = zori_affordability_long['date'] - pd.DateOffset(years=1)
-    
-    # Filter to top metros
-    zori_affordability_long = zori_affordability_long[zori_affordability_long['name'].isin(top_metros)]
-    
-    # Merge with metros_pop
-    zori_affordability_long = pd.merge(zori_affordability_long, metros_pop, on='name', how='left')
-    
-    # Save long format data
-    zori_affordability_long.to_csv(config.ZORI_AFFORDABILITY_LONG, index=False)
-    print(f"    ✓ Saved to: {config.ZORI_AFFORDABILITY_LONG}")
-
-    return zori_affordability_long
 
 def create_final_merged_datasets(zori_metro_long, homebuilding):
     """Create final merged datasets with most recent data."""
     print("  Creating final merged datasets...")
-
-    # Ensure date columns are the same type for merging
-    zori_metro_long['date'] = pd.to_datetime(zori_metro_long['date'])
-    homebuilding['date'] = pd.to_datetime(homebuilding['date'])
 
     # Get most recent dates
     most_recent_zori_date = zori_metro_long['date'].max()
@@ -290,12 +278,6 @@ def create_final_merged_datasets(zori_metro_long, homebuilding):
         suffixes=('_zori', '_homebuilding')
     )
 
-    # Rename date columns to be more descriptive
-    zori_metro_homebuilding_most_recent.rename(columns={
-        'date_zori': 'date_zori',
-        'date_homebuilding': 'date_homebuilding'
-    }, inplace=True)
-
     # Save merged dataset
     zori_metro_homebuilding_most_recent.to_csv(config.ZORI_METRO_BUILDING_MOST_RECENT, index=False)
     print(f"    ✓ Saved to: {config.ZORI_METRO_BUILDING_MOST_RECENT}")
@@ -307,9 +289,6 @@ def create_final_merged_datasets(zori_metro_long, homebuilding):
 def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, homebuilding):
     """Create a wide format dataset with rt_pc values for each month as columns (last 12 months only)."""
     print("  Creating wide format homebuilding timeseries...")
-
-    # Ensure date is datetime
-    homebuilding['date'] = pd.to_datetime(homebuilding['date'])
 
     # Get most recent date and filter to last 12 months
     most_recent_date = homebuilding['date'].max()
@@ -353,9 +332,6 @@ def create_wide_homebuilding_timeseries(zori_metro_homebuilding_most_recent, hom
 def create_affordability_most_recent(zori_affordability_long):
     """Create most recent affordability dataset."""
     print("  Creating most recent affordability dataset...")
-
-    # Ensure date column is datetime
-    zori_affordability_long['date'] = pd.to_datetime(zori_affordability_long['date'])
 
     # Get most recent date
     most_recent_date = zori_affordability_long['date'].max()
