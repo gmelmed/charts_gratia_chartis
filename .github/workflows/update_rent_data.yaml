@@ -2,10 +2,8 @@ name: Update Rent Tracker Data
 
 on:
   schedule:
-    # Run on the 12th at 12:00 UTC
-    - cron: '0 12 12 * *'
-    # Run on the 16th at 12:00 UTC
-    - cron: '0 12 16 * *'
+    # Run daily at 12:00 UTC to check if we should run
+    - cron: '0 12 * * *'
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
@@ -25,26 +23,66 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install python-dateutil
         
     - name: Determine which scripts to run
       id: determine_scripts
       run: |
-        DAY=$(date +%d)
-        echo "Today is day: $DAY"
+        python << 'EOF'
+        from datetime import datetime, timedelta
+        import os
         
-        if [ "$DAY" -eq 12 ]; then
-          echo "Running homebuilding collection (Census data)"
-          echo "run_homebuilding=true" >> $GITHUB_OUTPUT
-          echo "run_zillow=false" >> $GITHUB_OUTPUT
-        elif [ "$DAY" -eq 16 ]; then
-          echo "Running all scripts (Zillow data + homebuilding if not done)"
-          echo "run_homebuilding=true" >> $GITHUB_OUTPUT
-          echo "run_zillow=true" >> $GITHUB_OUTPUT
-        else
-          echo "Not running on scheduled day"
-          echo "run_homebuilding=false" >> $GITHUB_OUTPUT
-          echo "run_zillow=false" >> $GITHUB_OUTPUT
-        fi
+        def get_nth_working_day(year, month, n):
+            """Get the nth working day of a given month"""
+            # Start from the first day of the month
+            current = datetime(year, month, 1)
+            working_days = 0
+            
+            while working_days < n:
+                # Monday = 0, Sunday = 6
+                if current.weekday() < 5:  # Monday through Friday
+                    working_days += 1
+                    if working_days == n:
+                        return current.day
+                current += timedelta(days=1)
+            
+            return None
+        
+        today = datetime.now()
+        current_day = today.day
+        
+        # Calculate 12th working day of current month
+        twelfth_working_day = get_nth_working_day(today.year, today.month, 12)
+        
+        print(f"Today is: {today.strftime('%Y-%m-%d')} (day {current_day})")
+        print(f"12th working day of this month: day {twelfth_working_day}")
+        print(f"16th calendar day: day 16")
+        
+        # Determine which is later
+        later_day = max(twelfth_working_day, 16)
+        print(f"Later day: {later_day}")
+        
+        # Determine what to run
+        run_homebuilding = "false"
+        run_zillow = "false"
+        
+        if current_day == twelfth_working_day and current_day < 16:
+            print("Action: Run homebuilding only (12th working day, before 16th)")
+            run_homebuilding = "true"
+        elif current_day == later_day:
+            print("Action: Run full pipeline (later of 12th working day or 16th)")
+            run_homebuilding = "true"
+            run_zillow = "true"
+        else:
+            print("Action: Skip (not a scheduled day)")
+        
+        # Write to GitHub output
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write(f"run_homebuilding={run_homebuilding}\n")
+            f.write(f"run_zillow={run_zillow}\n")
+            f.write(f"twelfth_working_day={twelfth_working_day}\n")
+            f.write(f"later_day={later_day}\n")
+        EOF
         
     - name: Run homebuilding collection
       if: steps.determine_scripts.outputs.run_homebuilding == 'true'
