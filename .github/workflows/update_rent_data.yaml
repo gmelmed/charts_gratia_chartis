@@ -1,0 +1,80 @@
+name: Update Rent Tracker Data
+
+on:
+  schedule:
+    # Run on the 12th at 12:00 UTC
+    - cron: '0 12 12 * *'
+    # Run on the 16th at 12:00 UTC
+    - cron: '0 12 16 * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Determine which scripts to run
+      id: determine_scripts
+      run: |
+        DAY=$(date +%d)
+        echo "Today is day: $DAY"
+        
+        if [ "$DAY" -eq 12 ]; then
+          echo "Running homebuilding collection (Census data)"
+          echo "run_homebuilding=true" >> $GITHUB_OUTPUT
+          echo "run_zillow=false" >> $GITHUB_OUTPUT
+        elif [ "$DAY" -eq 16 ]; then
+          echo "Running all scripts (Zillow data + homebuilding if not done)"
+          echo "run_homebuilding=true" >> $GITHUB_OUTPUT
+          echo "run_zillow=true" >> $GITHUB_OUTPUT
+        else
+          echo "Not running on scheduled day"
+          echo "run_homebuilding=false" >> $GITHUB_OUTPUT
+          echo "run_zillow=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Run homebuilding collection
+      if: steps.determine_scripts.outputs.run_homebuilding == 'true'
+      working-directory: rent_tracker
+      run: python scripts/01_collect_homebuilding.py
+      
+    - name: Run population collection
+      if: steps.determine_scripts.outputs.run_zillow == 'true'
+      working-directory: rent_tracker
+      run: python scripts/02_collect_population.py
+      
+    - name: Run Zillow county collection
+      if: steps.determine_scripts.outputs.run_zillow == 'true'
+      working-directory: rent_tracker
+      run: python scripts/03_collect_zillow_county.py
+      
+    - name: Run Zillow metro collection
+      if: steps.determine_scripts.outputs.run_zillow == 'true'
+      working-directory: rent_tracker
+      run: python scripts/04_collect_zillow_metro.py
+      
+    - name: Run merge and finalize
+      if: steps.determine_scripts.outputs.run_zillow == 'true'
+      working-directory: rent_tracker
+      run: python scripts/05_merge_and_finalize.py
+      
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add rent_tracker/data/
+        git diff --staged --quiet || git commit -m "Update rent tracker data - $(date +'%Y-%m-%d')"
+        git push origin HEAD:main
