@@ -1,0 +1,246 @@
+{
+    "markets_teams": [
+        {
+            "market": "Greater New York",
+            "count": 9,
+            "teams": [
+                "New York Giants",
+                "New York Jets",
+                "New York Knicks",
+                "Brooklyn Nets",
+                "New York Yankees",
+                "New York Mets",
+                "New York Rangers",
+                "New York Islanders"
+            ]
+        },
+        {
+            "market": "Los Angeles",
+            "count": 8,
+            "teams": [
+                "Los Angeles Rams",
+                "Los Angeles Chargers",
+                "Los Angeles Lakers",
+                "Los Angeles Clippers",
+                "Los Angeles Dodgers",
+                "Los Angeles Angels",
+                "Los Angeles Kings",
+                "Anaheim Ducks"
+            ]
+        },
+        {
+            "market": "Chicago",
+            "count": 5,
+            "teams": [
+                "Chicago Bears",
+                "Chicago Bulls",
+                "Chicago White Sox",
+                "Chicago Cubs",
+                "Chicago Blackhawks"
+            ]
+        },
+        {
+            "market": "Dallas-Fort Worth",
+            "count": 4,
+            "teams": [
+                "Dallas Cowboys",
+                "Dallas Mavericks",
+                "Texas Rangers",
+                "Dallas Stars"
+            ]
+        },
+        {
+            "market": "Bay Area",
+            "count": 6,
+            "teams": [
+                "Oakland Raiders",
+                "Golden State Warriors",
+                "Oakland Athletics",
+                "San Francisco 49ers",
+                "San Francisco Giants",
+                "San Jose Sharks"
+            ]
+        },
+        {
+            "market": "Washington, D.C.",
+            "count": 5,
+            "teams": [
+                "Washington Redskins",
+                "Washington Commanders",
+                "Washington Football Team",
+                "Washington Wizards",
+                "Washington Nationals"
+            ]
+        },
+        {
+            "market": "Boston",
+            "count": 4,
+            "teams": [
+                "New England Patriots",
+                "Boston Celtics",
+                "Boston Red Sox",
+                "Boston Bruins"
+            ]
+        },
+        {
+            "market": "Philadelphia",
+            "count": 4,
+            "teams": [
+                "Philadelphia Eagles",
+                "Philadelphia 76ers",
+                "Philadelphia Phillies",
+                "Philadelphia Flyers"
+            ]
+        },
+        {
+            "market": "Miami",
+            "count": 3,
+            "teams": [
+                "Miami Dolphins",
+                "Miami Heat",
+                "Miami Marlins"
+            ]
+        },
+        {
+            "market": "Atlanta",
+            "count": 3,
+            "teams": [
+                "Atlanta Falcons",
+                "Atlanta Hawks",
+                "Atlanta Braves"
+            ]
+        },
+        {
+            "market": "Detroit",
+            "count": 4,
+            "teams": [
+                "Detroit Lions",
+                "Detroit Pistons",
+                "Detroit Tigers",
+                "Detroit Red Wings"
+            ]
+        },
+        {
+            "market": "Cleveland",
+            "count": 3,
+            "teams": [
+                "Cleveland Browns",
+                "Cleveland Cavaliers",
+                "Cleveland Guardians",
+                "Cleveland Indians"
+            ]
+        },
+        {
+            "market": "Pittsburgh",
+            "count": 3,
+            "teams": [
+                "Pittsburgh Steelers",
+                "Pittsburgh Penguins",
+                "Pittsburgh Pirates"
+            ]
+        },
+        {
+            "market": "Twin Cities",
+            "count": 4,
+            "teams": [
+                "Minnesota Vikings",
+                "Minnesota Timberwolves",
+                "Minnesota Twins",
+                "Minnesota Wild"
+            ]
+        },
+        {
+            "market": "Wisconsin",
+            "count": 3,
+            "teams": [
+                "Green Bay Packers",
+                "Milwaukee Bucks",
+                "Milwaukee Brewers"
+            ]
+        },
+        {
+            "market": "St. Louis",
+            "count": 3,
+            "teams": [
+                "St. Louis Rams",
+                "St. Louis Cardinals",
+                "St. Louis Blues"
+            ]
+        },
+        {
+            "market": "Tampa",
+            "count": 3,
+            "teams": [
+                "Tampa Bay Buccaneers",
+                "Tampa Bay Lightning",
+                "Tampa Bay Rays"
+            ]
+        },
+        {
+            "market": "Denver",
+            "count": 4,
+            "teams": [
+                "Denver Broncos",
+                "Denver Nuggets",
+                "Colorado Rockies",
+                "Colorado Avalanche"
+            ]
+        },
+        {
+            "market": "Seattle",
+            "count": 4,
+            "teams": [
+                "Seattle Seahawks",
+                "Seattle Mariners",
+                "Seattle Kraken",
+                "Seattle Supersonics"
+            ]
+        },
+        {
+            "market": "Houston",
+            "count": 3,
+            "teams": [
+                "Houston Texans",
+                "Houston Rockets",
+                "Houston Astros"
+            ]
+        },
+        {
+            "market": "Phoenix",
+            "count": 3,
+            "teams": [
+                "Arizona Cardinals",
+                "Phoenix Suns",
+                "Arizona Diamondbacks"
+            ]
+        },
+        {
+            "market": "Tennessee",
+            "count": 3,
+            "teams": [
+                "Tennessee Titans",
+                "Nashville Predators",
+                "Memphis Grizzlies"
+            ]
+        },
+        {
+            "market": "Toronto",
+            "count": 3,
+            "teams": [
+                "Toronto Raptors",
+                "Toronto Blue Jays",
+                "Toronto Maple Leafs"
+            ]
+        },
+        {
+            "market": "North Carolina",
+            "count": 3,
+            "teams": [
+                "Carolina Panthers",
+                "Charlotte Hornets",
+                "Charlotte Bobcats",
+                "Carolina Hurricanes"
+            ]
+        }
+    ]
+}
