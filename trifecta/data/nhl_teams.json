@@ -1,0 +1,130 @@
+[
+    {
+        "name":"Colorado Avalanche",
+        "franchise_id":27
+    },
+    {
+        "name":"Dallas Stars",
+        "franchise_id":15
+    },
+    {
+        "name":"Washington Capitals",
+        "franchise_id":24
+    },
+    {
+        "name":"Anaheim Ducks",
+        "franchise_id":32
+    },
+    {
+        "name":"Minnesota Wild",
+        "franchise_id":37
+    },
+    {
+        "name":"Carolina Hurricanes",
+        "franchise_id":26
+    },
+    {
+        "name":"Vegas Golden Knights",
+        "franchise_id":38
+    },
+    {
+        "name":"Los Angeles Kings",
+        "franchise_id":14
+    },
+    {
+        "name":"New York Islanders",
+        "franchise_id":22
+    },
+    {
+        "name":"Detroit Red Wings",
+        "franchise_id":12
+    },
+    {
+        "name":"Pittsburgh Penguins",
+        "franchise_id":17
+    },
+    {
+        "name":"Tampa Bay Lightning",
+        "franchise_id":31
+    },
+    {
+        "name":"Boston Bruins",
+        "franchise_id":6
+    },
+    {
+        "name":"New York Rangers",
+        "franchise_id":10
+    },
+    {
+        "name":"Philadelphia Flyers",
+        "franchise_id":16
+    },
+    {
+        "name":"Montr\u00e9al Canadiens",
+        "franchise_id":1
+    },
+    {
+        "name":"New Jersey Devils",
+        "franchise_id":23
+    },
+    {
+        "name":"Toronto Maple Leafs",
+        "franchise_id":5
+    },
+    {
+        "name":"Columbus Blue Jackets",
+        "franchise_id":36
+    },
+    {
+        "name":"Edmonton Oilers",
+        "franchise_id":25
+    },
+    {
+        "name":"San Jose Sharks",
+        "franchise_id":29
+    },
+    {
+        "name":"Utah Mammoth",
+        "franchise_id":40
+    },
+    {
+        "name":"Florida Panthers",
+        "franchise_id":33
+    },
+    {
+        "name":"Ottawa Senators",
+        "franchise_id":30
+    },
+    {
+        "name":"Chicago Blackhawks",
+        "franchise_id":11
+    },
+    {
+        "name":"Winnipeg Jets",
+        "franchise_id":35
+    },
+    {
+        "name":"St. Louis Blues",
+        "franchise_id":18
+    },
+    {
+        "name":"Seattle Kraken",
+        "franchise_id":39
+    },
+    {
+        "name":"Calgary Flames",
+        "franchise_id":21
+    },
+    {
+        "name":"Buffalo Sabres",
+        "franchise_id":19
+    },
+    {
+        "name":"Vancouver Canucks",
+        "franchise_id":20
+    },
+    {
+        "name":"Nashville Predators",
+        "franchise_id":34
+    }
+]

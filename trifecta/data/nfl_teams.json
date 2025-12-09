@@ -1,0 +1,146 @@
+[
+    {
+        "team_id":3800,
+        "team_name":"Arizona Cardinals"
+    },
+    {
+        "team_id":200,
+        "team_name":"Atlanta Falcons"
+    },
+    {
+        "team_id":325,
+        "team_name":"Baltimore Ravens"
+    },
+    {
+        "team_id":610,
+        "team_name":"Buffalo Bills"
+    },
+    {
+        "team_id":750,
+        "team_name":"Carolina Panthers"
+    },
+    {
+        "team_id":810,
+        "team_name":"Chicago Bears"
+    },
+    {
+        "team_id":920,
+        "team_name":"Cincinnati Bengals"
+    },
+    {
+        "team_id":1050,
+        "team_name":"Cleveland Browns"
+    },
+    {
+        "team_id":1200,
+        "team_name":"Dallas Cowboys"
+    },
+    {
+        "team_id":1400,
+        "team_name":"Denver Broncos"
+    },
+    {
+        "team_id":1540,
+        "team_name":"Detroit Lions"
+    },
+    {
+        "team_id":1800,
+        "team_name":"Green Bay Packers"
+    },
+    {
+        "team_id":2120,
+        "team_name":"Houston Texans"
+    },
+    {
+        "team_id":2200,
+        "team_name":"Indianapolis Colts"
+    },
+    {
+        "team_id":2250,
+        "team_name":"Jacksonville Jaguars"
+    },
+    {
+        "team_id":2310,
+        "team_name":"Kansas City Chiefs"
+    },
+    {
+        "team_id":2510,
+        "team_name":"Los Angeles Rams"
+    },
+    {
+        "team_id":4400,
+        "team_name":"Los Angeles Chargers"
+    },
+    {
+        "team_id":2510,
+        "team_name":"Los Angeles Rams"
+    },
+    {
+        "team_id":2520,
+        "team_name":"Las Vegas Raiders"
+    },
+    {
+        "team_id":2700,
+        "team_name":"Miami Dolphins"
+    },
+    {
+        "team_id":3000,
+        "team_name":"Minnesota Vikings"
+    },
+    {
+        "team_id":3200,
+        "team_name":"New England Patriots"
+    },
+    {
+        "team_id":3300,
+        "team_name":"New Orleans Saints"
+    },
+    {
+        "team_id":3410,
+        "team_name":"New York Giants"
+    },
+    {
+        "team_id":3430,
+        "team_name":"New York Jets"
+    },
+    {
+        "team_id":2520,
+        "team_name":"Oakland Raiders"
+    },
+    {
+        "team_id":3700,
+        "team_name":"Philadelphia Eagles"
+    },
+    {
+        "team_id":3900,
+        "team_name":"Pittsburgh Steelers"
+    },
+    {
+        "team_id":4400,
+        "team_name":"San Diego Chargers"
+    },
+    {
+        "team_id":4600,
+        "team_name":"Seattle Seahawks"
+    },
+    {
+        "team_id":4500,
+        "team_name":"San Francisco 49ers"
+    },
+    {
+        "team_id":2510,
+        "team_name":"St. Louis Rams"
+    },
+    {
+        "team_id":4900,
+        "team_name":"Tampa Bay Buccaneers"
+    },
+    {
+        "team_id":2100,
+        "team_name":"Tennessee Titans"
+    },
+    {
+        "team_id":5110,
+        "team_name":"Washington Commanders"
+    }
+]

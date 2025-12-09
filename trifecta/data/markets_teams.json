@@ -4,242 +4,634 @@
             "market": "Greater New York",
             "count": 9,
             "teams": [
-                "New York Giants",
-                "New York Jets",
-                "New York Knicks",
-                "Brooklyn Nets",
-                "New York Yankees",
-                "New York Mets",
-                "New York Rangers",
-                "New York Islanders"
+                {
+                    "name": "New York Giants",
+                    "league": "NFL",
+                    "api_id": 3410
+                },
+                {
+                    "name": "New York Jets",
+                    "league": "NFL",
+                    "api_id": 3430
+                },
+                {
+                    "name": "New York Knicks",
+                    "league": "NBA",
+                    "api_id": 1610612752
+                },
+                {
+                    "name": "Brooklyn Nets",
+                    "league": "NBA",
+                    "api_id": 1610612751
+                },
+                {
+                    "name": "New York Yankees",
+                    "league": "MLB",
+                    "api_id": 147
+                },
+                {
+                    "name": "New York Mets",
+                    "league": "MLB",
+                    "api_id": 121
+                },
+                {
+                    "name": "New York Rangers",
+                    "league": "NHL",
+                    "api_id": 10
+                },
+                {
+                    "name": "New York Islanders",
+                    "league": "NHL",
+                    "api_id": 22
+                }
             ]
         },
         {
             "market": "Los Angeles",
             "count": 8,
             "teams": [
-                "Los Angeles Rams",
-                "Los Angeles Chargers",
-                "Los Angeles Lakers",
-                "Los Angeles Clippers",
-                "Los Angeles Dodgers",
-                "Los Angeles Angels",
-                "Los Angeles Kings",
-                "Anaheim Ducks"
+                {
+                    "name": "Los Angeles Rams",
+                    "league": "NFL",
+                    "api_id": 2510
+                },
+                {
+                    "name": "Los Angeles Chargers",
+                    "league": "NFL",
+                    "api_id": 4400
+                },
+                {
+                    "name": "Los Angeles Lakers",
+                    "league": "NBA",
+                    "api_id": 1610612747
+                },
+                {
+                    "name": "Los Angeles Clippers",
+                    "league": "NBA",
+                    "api_id": 1610612746
+                },
+                {
+                    "name": "Los Angeles Dodgers",
+                    "league": "MLB",
+                    "api_id": 119
+                },
+                {
+                    "name": "Los Angeles Angels",
+                    "league": "MLB",
+                    "api_id": 108
+                },
+                {
+                    "name": "Los Angeles Kings",
+                    "league": "NHL",
+                    "api_id": 14
+                },
+                {
+                    "name": "Anaheim Ducks",
+                    "league": "NHL",
+                    "api_id": 32
+                }
             ]
         },
         {
             "market": "Chicago",
             "count": 5,
             "teams": [
-                "Chicago Bears",
-                "Chicago Bulls",
-                "Chicago White Sox",
-                "Chicago Cubs",
-                "Chicago Blackhawks"
+                {
+                    "name": "Chicago Bears",
+                    "league": "NFL",
+                    "api_id": 810
+                },
+                {
+                    "name": "Chicago Bulls",
+                    "league": "NBA",
+                    "api_id": 1610612741
+                },
+                {
+                    "name": "Chicago White Sox",
+                    "league": "MLB",
+                    "api_id": 145
+                },
+                {
+                    "name": "Chicago Cubs",
+                    "league": "MLB",
+                    "api_id": 112
+                },
+                {
+                    "name": "Chicago Blackhawks",
+                    "league": "NHL",
+                    "api_id": 11
+                }
             ]
         },
         {
             "market": "Dallas-Fort Worth",
             "count": 4,
             "teams": [
-                "Dallas Cowboys",
-                "Dallas Mavericks",
-                "Texas Rangers",
-                "Dallas Stars"
+                {
+                    "name": "Dallas Cowboys",
+                    "league": "NFL",
+                    "api_id": 1200
+                },
+                {
+                    "name": "Dallas Mavericks",
+                    "league": "NBA",
+                    "api_id": 1610612742
+                },
+                {
+                    "name": "Texas Rangers",
+                    "league": "MLB",
+                    "api_id": 140
+                },
+                {
+                    "name": "Dallas Stars",
+                    "league": "NHL",
+                    "api_id": 15
+                }
             ]
         },
         {
             "market": "Bay Area",
             "count": 6,
             "teams": [
-                "Oakland Raiders",
-                "Golden State Warriors",
-                "Oakland Athletics",
-                "San Francisco 49ers",
-                "San Francisco Giants",
-                "San Jose Sharks"
+                {
+                    "name": "Oakland Raiders",
+                    "league": "NFL",
+                    "api_id": 2520
+                },
+                {
+                    "name": "Golden State Warriors",
+                    "league": "NBA",
+                    "api_id": 1610612744
+                },
+                {
+                    "name": "Oakland Athletics",
+                    "league": "MLB",
+                    "api_id": 133
+                },
+                {
+                    "name": "San Francisco 49ers",
+                    "league": "NFL",
+                    "api_id": 4500
+                },
+                {
+                    "name": "San Francisco Giants",
+                    "league": "MLB",
+                    "api_id": 137
+                },
+                {
+                    "name": "San Jose Sharks",
+                    "league": "NHL",
+                    "api_id": 29
+                }
             ]
         },
         {
             "market": "Washington, D.C.",
             "count": 5,
             "teams": [
-                "Washington Redskins",
-                "Washington Commanders",
-                "Washington Football Team",
-                "Washington Wizards",
-                "Washington Nationals"
+                {
+                    "name": "Washington Redskins",
+                    "league": "NFL",
+                    "api_id": 5110
+                },
+                {
+                    "name": "Washington Commanders",
+                    "league": "NFL",
+                    "api_id": 5110
+                },
+                {
+                    "name": "Washington Football Team",
+                    "league": "NFL",
+                    "api_id": 5110
+                },
+                {
+                    "name": "Washington Wizards",
+                    "league": "NBA",
+                    "api_id": 1610612764
+                },
+                {
+                    "name": "Washington Nationals",
+                    "league": "MLB",
+                    "api_id": 120
+                }
             ]
         },
         {
             "market": "Boston",
             "count": 4,
             "teams": [
-                "New England Patriots",
-                "Boston Celtics",
-                "Boston Red Sox",
-                "Boston Bruins"
+                {
+                    "name": "New England Patriots",
+                    "league": "NFL",
+                    "api_id": 3200
+                },
+                {
+                    "name": "Boston Celtics",
+                    "league": "NBA",
+                    "api_id": 1610612738
+                },
+                {
+                    "name": "Boston Red Sox",
+                    "league": "MLB",
+                    "api_id": 111
+                },
+                {
+                    "name": "Boston Bruins",
+                    "league": "NHL",
+                    "api_id": 6
+                }
             ]
         },
         {
             "market": "Philadelphia",
             "count": 4,
             "teams": [
-                "Philadelphia Eagles",
-                "Philadelphia 76ers",
-                "Philadelphia Phillies",
-                "Philadelphia Flyers"
+                {
+                    "name": "Philadelphia Eagles",
+                    "league": "NFL",
+                    "api_id": 3700
+                },
+                {
+                    "name": "Philadelphia 76ers",
+                    "league": "NBA",
+                    "api_id": 1610612755
+                },
+                {
+                    "name": "Philadelphia Phillies",
+                    "league": "MLB",
+                    "api_id": 143
+                },
+                {
+                    "name": "Philadelphia Flyers",
+                    "league": "NHL",
+                    "api_id": 16
+                }
             ]
         },
         {
             "market": "Miami",
             "count": 3,
             "teams": [
-                "Miami Dolphins",
-                "Miami Heat",
-                "Miami Marlins"
+                {
+                    "name": "Miami Dolphins",
+                    "league": "NFL",
+                    "api_id": 2700
+                },
+                {
+                    "name": "Miami Heat",
+                    "league": "NBA",
+                    "api_id": 1610612748
+                },
+                {
+                    "name": "Miami Marlins",
+                    "league": "MLB",
+                    "api_id": 146
+                }
             ]
         },
         {
             "market": "Atlanta",
             "count": 3,
             "teams": [
-                "Atlanta Falcons",
-                "Atlanta Hawks",
-                "Atlanta Braves"
+                {
+                    "name": "Atlanta Falcons",
+                    "league": "NFL",
+                    "api_id": 200
+                },
+                {
+                    "name": "Atlanta Hawks",
+                    "league": "NBA",
+                    "api_id": 1610612737
+                },
+                {
+                    "name": "Atlanta Braves",
+                    "league": "MLB",
+                    "api_id": 144
+                }
             ]
         },
         {
             "market": "Detroit",
             "count": 4,
             "teams": [
-                "Detroit Lions",
-                "Detroit Pistons",
-                "Detroit Tigers",
-                "Detroit Red Wings"
+                {
+                    "name": "Detroit Lions",
+                    "league": "NFL",
+                    "api_id": 1540
+                },
+                {
+                    "name": "Detroit Pistons",
+                    "league": "NBA",
+                    "api_id": 1610612765
+                },
+                {
+                    "name": "Detroit Tigers",
+                    "league": "MLB",
+                    "api_id": 116
+                },
+                {
+                    "name": "Detroit Red Wings",
+                    "league": "NHL",
+                    "api_id": 12
+                }
             ]
         },
         {
             "market": "Cleveland",
             "count": 3,
             "teams": [
-                "Cleveland Browns",
-                "Cleveland Cavaliers",
-                "Cleveland Guardians",
-                "Cleveland Indians"
+                {
+                    "name": "Cleveland Browns",
+                    "league": "NFL",
+                    "api_id": 1050
+                },
+                {
+                    "name": "Cleveland Cavaliers",
+                    "league": "NBA",
+                    "api_id": 1610612739
+                },
+                {
+                    "name": "Cleveland Guardians",
+                    "league": "MLB",
+                    "api_id": 114
+                },
+                {
+                    "name": "Cleveland Indians",
+                    "league": "MLB",
+                    "api_id": 114
+                }
             ]
         },
         {
             "market": "Pittsburgh",
             "count": 3,
             "teams": [
-                "Pittsburgh Steelers",
-                "Pittsburgh Penguins",
-                "Pittsburgh Pirates"
+                {
+                    "name": "Pittsburgh Steelers",
+                    "league": "NFL",
+                    "api_id": 3900
+                },
+                {
+                    "name": "Pittsburgh Penguins",
+                    "league": "NHL",
+                    "api_id": 17
+                },
+                {
+                    "name": "Pittsburgh Pirates",
+                    "league": "MLB",
+                    "api_id": 134
+                }
             ]
         },
         {
             "market": "Twin Cities",
             "count": 4,
             "teams": [
-                "Minnesota Vikings",
-                "Minnesota Timberwolves",
-                "Minnesota Twins",
-                "Minnesota Wild"
+                {
+                    "name": "Minnesota Vikings",
+                    "league": "NFL",
+                    "api_id": 3000
+                },
+                {
+                    "name": "Minnesota Timberwolves",
+                    "league": "NBA",
+                    "api_id": 1610612750
+                },
+                {
+                    "name": "Minnesota Twins",
+                    "league": "MLB",
+                    "api_id": 142
+                },
+                {
+                    "name": "Minnesota Wild",
+                    "league": "NHL",
+                    "api_id": 37
+                }
             ]
         },
         {
             "market": "Wisconsin",
             "count": 3,
             "teams": [
-                "Green Bay Packers",
-                "Milwaukee Bucks",
-                "Milwaukee Brewers"
+                {
+                    "name": "Green Bay Packers",
+                    "league": "NFL",
+                    "api_id": 1800
+                },
+                {
+                    "name": "Milwaukee Bucks",
+                    "league": "NBA",
+                    "api_id": 1610612749
+                },
+                {
+                    "name": "Milwaukee Brewers",
+                    "league": "MLB",
+                    "api_id": 158
+                }
             ]
         },
         {
             "market": "St. Louis",
             "count": 3,
             "teams": [
-                "St. Louis Rams",
-                "St. Louis Cardinals",
-                "St. Louis Blues"
+                {
+                    "name": "St. Louis Rams",
+                    "league": "NFL",
+                    "api_id": 2510
+                },
+                {
+                    "name": "St. Louis Cardinals",
+                    "league": "MLB",
+                    "api_id": 138
+                },
+                {
+                    "name": "St. Louis Blues",
+                    "league": "NHL",
+                    "api_id": 18
+                }
             ]
         },
         {
             "market": "Tampa",
             "count": 3,
             "teams": [
-                "Tampa Bay Buccaneers",
-                "Tampa Bay Lightning",
-                "Tampa Bay Rays"
+                {
+                    "name": "Tampa Bay Buccaneers",
+                    "league": "NFL",
+                    "api_id": 4900
+                },
+                {
+                    "name": "Tampa Bay Lightning",
+                    "league": "NHL",
+                    "api_id": 31
+                },
+                {
+                    "name": "Tampa Bay Rays",
+                    "league": "MLB",
+                    "api_id": 139
+                }
             ]
         },
         {
             "market": "Denver",
             "count": 4,
             "teams": [
-                "Denver Broncos",
-                "Denver Nuggets",
-                "Colorado Rockies",
-                "Colorado Avalanche"
+                {
+                    "name": "Denver Broncos",
+                    "league": "NFL",
+                    "api_id": 1400
+                },
+                {
+                    "name": "Denver Nuggets",
+                    "league": "NBA",
+                    "api_id": 1610612743
+                },
+                {
+                    "name": "Colorado Rockies",
+                    "league": "MLB",
+                    "api_id": 115
+                },
+                {
+                    "name": "Colorado Avalanche",
+                    "league": "NHL",
+                    "api_id": 27
+                }
             ]
         },
         {
             "market": "Seattle",
             "count": 4,
             "teams": [
-                "Seattle Seahawks",
-                "Seattle Mariners",
-                "Seattle Kraken",
-                "Seattle Supersonics"
+                {
+                    "name": "Seattle Seahawks",
+                    "league": "NFL",
+                    "api_id": 4600
+                },
+                {
+                    "name": "Seattle Mariners",
+                    "league": "MLB",
+                    "api_id": 136
+                },
+                {
+                    "name": "Seattle Kraken",
+                    "league": "NHL",
+                    "api_id": 39
+                },
+                {
+                    "name": "Seattle Supersonics",
+                    "league": "NBA",
+                    "api_id": 1610612760
+                }
             ]
         },
         {
             "market": "Houston",
             "count": 3,
             "teams": [
-                "Houston Texans",
-                "Houston Rockets",
-                "Houston Astros"
+                {
+                    "name": "Houston Texans",
+                    "league": "NFL",
+                    "api_id": 2120
+                },
+                {
+                    "name": "Houston Rockets",
+                    "league": "NBA",
+                    "api_id": 1610612745
+                },
+                {
+                    "name": "Houston Astros",
+                    "league": "MLB",
+                    "api_id": 117
+                }
             ]
         },
         {
             "market": "Phoenix",
             "count": 3,
             "teams": [
-                "Arizona Cardinals",
-                "Phoenix Suns",
-                "Arizona Diamondbacks"
+                {
+                    "name": "Arizona Cardinals",
+                    "league": "NFL",
+                    "api_id": 3800
+                },
+                {
+                    "name": "Phoenix Suns",
+                    "league": "NBA",
+                    "api_id": 1610612756
+                },
+                {
+                    "name": "Arizona Diamondbacks",
+                    "league": "MLB",
+                    "api_id": 109
+                }
             ]
         },
         {
             "market": "Tennessee",
             "count": 3,
             "teams": [
-                "Tennessee Titans",
-                "Nashville Predators",
-                "Memphis Grizzlies"
+                {
+                    "name": "Tennessee Titans",
+                    "league": "NFL",
+                    "api_id": 2100
+                },
+                {
+                    "name": "Nashville Predators",
+                    "league": "NHL",
+                    "api_id": 34
+                },
+                {
+                    "name": "Memphis Grizzlies",
+                    "league": "NBA",
+                    "api_id": 1610612763
+                }
             ]
         },
         {
             "market": "Toronto",
             "count": 3,
             "teams": [
-                "Toronto Raptors",
-                "Toronto Blue Jays",
-                "Toronto Maple Leafs"
+                {
+                    "name": "Toronto Raptors",
+                    "league": "NBA",
+                    "api_id": 1610612761
+                },
+                {
+                    "name": "Toronto Blue Jays",
+                    "league": "MLB",
+                    "api_id": 141
+                },
+                {
+                    "name": "Toronto Maple Leafs",
+                    "league": "NHL",
+                    "api_id": 5
+                }
             ]
         },
         {
             "market": "North Carolina",
             "count": 3,
             "teams": [
-                "Carolina Panthers",
-                "Charlotte Hornets",
-                "Charlotte Bobcats",
-                "Carolina Hurricanes"
+                {
+                    "name": "Carolina Panthers",
+                    "league": "NFL",
+                    "api_id": 750
+                },
+                {
+                    "name": "Charlotte Hornets",
+                    "league": "NBA",
+                    "api_id": 1610612766
+                },
+                {
+                    "name": "Charlotte Bobcats",
+                    "league": "NBA",
+                    "api_id": 1610612766
+                },
+                {
+                    "name": "Carolina Hurricanes",
+                    "league": "NHL",
+                    "api_id": 26
+                }
             ]
         }
     ]

@@ -12,13 +12,13 @@ import config
 
 # 1970 to present (2025-2026 season)
 all_games_list = []
-for i in range(1970, 2026):
+for i in range(2000, 2026):
     season_str = f"{i}-{str(i+1)[-2:]}"
     print(f"Fetching season {season_str}...")
 
     try:
         # Specify the season in the API call
-        gamefinder = leaguegamefinder.LeagueGameFinder(season_nullable=season_str, league_id_nullable='00')
+        gamefinder = leaguegamefinder.LeagueGameFinder(season_nullable=season_str, league_id_nullable='00', season_type_nullable='Regular Season', team_id_nullable='1610612743')
         games = gamefinder.get_data_frames()[0]
         games['SEASON'] = season_str
         all_games_list.append(games)
