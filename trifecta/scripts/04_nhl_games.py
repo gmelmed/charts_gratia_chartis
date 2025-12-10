@@ -28,27 +28,18 @@ for market in markets_data['markets_teams']:
             nhl_teams.append({
                 'market': market['market'],
                 'name': team['name'],
-                'api_id': team['api_id']
+                'api_id': team['api_id'],
+                'abbr': team['abbr']
             })
 
 print(f"Found {len(nhl_teams)} NHL teams to fetch")
-
-
-# Create a mapping from team names to abbreviations (cache this to avoid repeated API calls)
-print("Fetching team abbreviations...")
-teams_data = client.teams.teams()
-name_to_abbr = {}
-for team in teams_data:
-    common_name = team.get('common_name', '')
-    abbr = team.get('abbr', '')
-    if common_name and abbr:
-        name_to_abbr[common_name] = abbr
 
 # Loop through each NHL team
 for team_info in nhl_teams:
     market = team_info['market'].lower()
     team_name = team_info['name']
     team_id = team_info['api_id']
+    team_abbr = team_info['abbr']
 
     # Create safe filename from team name (remove spaces and special chars)
     team_filename = team_name.lower().replace(' ', '_').replace('.', '')
@@ -60,14 +51,8 @@ for team_info in nhl_teams:
         continue
 
     print(f"\n{'='*60}")
-    print(f"Fetching games for {team_name} (ID: {team_id})")
+    print(f"Fetching games for {team_name} (ID: {team_id}, Abbr: {team_abbr})")
     print(f"{'='*60}")
-
-    # Get team abbreviation
-    team_abbr = name_to_abbr.get(team_name, None)
-    if not team_abbr:
-        print(f"  Warning: No abbreviation found for {team_name}. Skipping.")
-        continue
 
     all_games_list = []
     for year in range(2000, 2026):
