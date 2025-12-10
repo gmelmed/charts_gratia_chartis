@@ -43,6 +43,7 @@ def fetch_with_retry(season_str, season_type, team_api_id, max_retries=3):
                 league_id_nullable='00',
                 season_type_nullable=season_type,
                 team_id_nullable=str(team_api_id),
+                # outcome_nullable='W',
                 timeout=60  # Increase timeout to 60 seconds
             )
             games = gamefinder.get_data_frames()[0]
@@ -60,8 +61,18 @@ def fetch_with_retry(season_str, season_type, team_api_id, max_retries=3):
 
 # Process each team separately
 for team in nba_teams:
+    # get the market name from the parent category of each team in markets_teams.json
+    market_name = None
+    for market in markets_data['markets_teams']:
+        for t in market['teams']:
+            if t['api_id'] == team['api_id']:
+                market_name = market['market']
+                break
+        if market_name:
+            break
+
     team_name_clean = team['name'].replace(' ', '_').replace('.', '')
-    team_file = raw_data_dir / f"nba_{team_name_clean}_{team['api_id']}.csv"
+    team_file = raw_data_dir / f"nba_{market_name}_{team_name_clean}_{team['api_id']}.csv"
 
     # Skip if team file already exists
     if team_file.exists():
@@ -98,9 +109,9 @@ print("\n=== All teams processed ===")
 print(f"Individual team files saved to: {raw_data_dir}")
 
 # Combine all team files into single dataset
-print("\nCombining all team files into single dataset...")
-all_team_files = list(raw_data_dir.glob("nba_*.csv"))
-if all_team_files:
-    all_games = pd.concat([pd.read_csv(f) for f in all_team_files], ignore_index=True)
-    all_games.to_csv(config.NBA_ALL_GAMES, index=False)
-    print(f"All NBA games data saved to: {config.NBA_ALL_GAMES}")
+# print("\nCombining all team files into single dataset...")
+# all_team_files = list(raw_data_dir.glob("nba_*.csv"))
+# if all_team_files:
+#     all_games = pd.concat([pd.read_csv(f) for f in all_team_files], ignore_index=True)
+#     all_games.to_csv(config.NBA_ALL_GAMES, index=False)
+#     print(f"All NBA games data saved to: {config.NBA_ALL_GAMES}")

@@ -186,21 +186,11 @@
             ]
         },
         {
-            "market": "Washington, D.C.",
+            "market": "Washington DC",
             "count": 5,
             "teams": [
                 {
-                    "name": "Washington Redskins",
-                    "league": "NFL",
-                    "api_id": 5110
-                },
-                {
                     "name": "Washington Commanders",
-                    "league": "NFL",
-                    "api_id": 5110
-                },
-                {
-                    "name": "Washington Football Team",
                     "league": "NFL",
                     "api_id": 5110
                 },
@@ -213,6 +203,11 @@
                     "name": "Washington Nationals",
                     "league": "MLB",
                     "api_id": 120
+                },
+                {
+                    "name": "Washington Capitals",
+                    "league": "NHL",
+                    "api_id": 24
                 }
             ]
         },
@@ -286,6 +281,11 @@
                     "name": "Miami Marlins",
                     "league": "MLB",
                     "api_id": 146
+                },
+                {
+                    "name": "Florida Panthers",
+                    "league": "NHL",
+                    "api_id": 33
                 }
             ]
         },
@@ -624,11 +624,6 @@
                 },
                 {
                     "name": "Charlotte Hornets",
-                    "league": "NBA",
-                    "api_id": 1610612766
-                },
-                {
-                    "name": "Charlotte Bobcats",
                     "league": "NBA",
                     "api_id": 1610612766
                 },
