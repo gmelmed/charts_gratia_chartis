@@ -61,18 +61,8 @@ def fetch_with_retry(season_str, season_type, team_api_id, max_retries=3):
 
 # Process each team separately
 for team in nba_teams:
-    # get the market name from the parent category of each team in markets_teams.json
-    market_name = None
-    for market in markets_data['markets_teams']:
-        for t in market['teams']:
-            if t['api_id'] == team['api_id']:
-                market_name = market['market']
-                break
-        if market_name:
-            break
-
     team_name_clean = team['name'].replace(' ', '_').replace('.', '')
-    team_file = raw_data_dir / f"nba_{market_name}_{team_name_clean}_{team['api_id']}.csv"
+    team_file = raw_data_dir / f"nba_{team_name_clean}_{team['api_id']}.csv"
 
     # Skip if team file already exists
     if team_file.exists():
