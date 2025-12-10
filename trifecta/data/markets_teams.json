@@ -547,7 +547,7 @@
         },
         {
             "market": "Phoenix",
-            "count": 3,
+            "count": 4,
             "teams": [
                 {
                     "name": "Arizona Cardinals",
@@ -563,6 +563,11 @@
                     "name": "Arizona Diamondbacks",
                     "league": "MLB",
                     "api_id": 109
+                },
+                {
+                    "name": "Arizona Coyotes",
+                    "league": "NHL",
+                    "api_id": 40
                 }
             ]
         },
