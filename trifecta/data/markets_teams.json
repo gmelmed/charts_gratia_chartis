@@ -8,49 +8,57 @@
                     "name": "Giants",
                     "league": "NFL",
                     "api_id": 3410,
-                    "abbr": "NYG"
+                    "abbr": "NYG",
+                    "full_name": "New York Giants"
                 },
                 {
                     "name": "Jets",
                     "league": "NFL",
                     "api_id": 3430,
-                    "abbr": "NYJ"
+                    "abbr": "NYJ",
+                    "full_name": "New York Jets"
                 },
                 {
                     "name": "Knicks",
                     "league": "NBA",
                     "api_id": 1610612752,
-                    "abbr": "NYK"
+                    "abbr": "NYK",
+                    "full_name": "New York Knicks"
                 },
                 {
                     "name": "Nets",
                     "league": "NBA",
                     "api_id": 1610612751,
-                    "abbr": "BKN"
+                    "abbr": "BKN",
+                    "full_name": "Brooklyn Nets"
                 },
                 {
                     "name": "Yankees",
                     "league": "MLB",
                     "api_id": 147,
-                    "abbr": "NYY"
+                    "abbr": "NYY",
+                    "full_name": "New York Yankees"
                 },
                 {
                     "name": "Mets",
                     "league": "MLB",
                     "api_id": 121,
-                    "abbr": "NYM"
+                    "abbr": "NYM",
+                    "full_name": "New York Mets"
                 },
                 {
                     "name": "Rangers",
                     "league": "NHL",
                     "api_id": 10,
-                    "abbr": "NYR"
+                    "abbr": "NYR",
+                    "full_name": "New York Rangers"
                 },
                 {
                     "name": "Islanders",
                     "league": "NHL",
                     "api_id": 22,
-                    "abbr": "NYI"
+                    "abbr": "NYI",
+                    "full_name": "New York Islanders"
                 }
             ]
         },
@@ -62,37 +70,43 @@
                     "name": "Rams",
                     "league": "NFL",
                     "api_id": 2510,
-                    "abbr": "LAR"
+                    "abbr": "LAR",
+                    "full_name": "Los Angeles Rams"
                 },
                 {
                     "name": "Chargers",
                     "league": "NFL",
                     "api_id": 4400,
-                    "abbr": "LAC"
+                    "abbr": "LAC",
+                    "full_name": "Los Angeles Chargers"
                 },
                 {
                     "name": "Lakers",
                     "league": "NBA",
                     "api_id": 1610612747,
-                    "abbr": "LAL"
+                    "abbr": "LAL",
+                    "full_name": "Los Angeles Lakers"
                 },
                 {
                     "name": "Clippers",
                     "league": "NBA",
                     "api_id": 1610612746,
-                    "abbr": "LAC"
+                    "abbr": "LAC",
+                    "full_name": "Los Angeles Clippers"
                 },
                 {
                     "name": "Dodgers",
                     "league": "MLB",
                     "api_id": 119,
-                    "abbr": "LAD"
+                    "abbr": "LAD",
+                    "full_name": "Los Angeles Dodgers"
                 },
                 {
                     "name": "Kings",
                     "league": "NHL",
                     "api_id": 14,
-                    "abbr": "LAK"
+                    "abbr": "LAK",
+                    "full_name": "Los Angeles Kings"
                 }
             ]
         },
@@ -104,31 +118,36 @@
                     "name": "Bears",
                     "league": "NFL",
                     "api_id": 810,
-                    "abbr": "CHI"
+                    "abbr": "CHI",
+                    "full_name": "Chicago Bears"
                 },
                 {
                     "name": "Bulls",
                     "league": "NBA",
                     "api_id": 1610612741,
-                    "abbr": "CHI"
+                    "abbr": "CHI",
+                    "full_name": "Chicago Bulls"
                 },
                 {
                     "name": "White Sox",
                     "league": "MLB",
                     "api_id": 145,
-                    "abbr": "CHW"
+                    "abbr": "CHW",
+                    "full_name": "Chicago White Sox"
                 },
                 {
                     "name": "Cubs",
                     "league": "MLB",
                     "api_id": 112,
-                    "abbr": "CHC"
+                    "abbr": "CHC",
+                    "full_name": "Chicago Cubs"
                 },
                 {
                     "name": "Blackhawks",
                     "league": "NHL",
                     "api_id": 11,
-                    "abbr": "CHI"
+                    "abbr": "CHI",
+                    "full_name": "Chicago Blackhawks"
                 }
             ]
         },
@@ -140,25 +159,29 @@
                     "name": "Cowboys",
                     "league": "NFL",
                     "api_id": 1200,
-                    "abbr": "DAL"
+                    "abbr": "DAL",
+                    "full_name": "Dallas Cowboys"
                 },
                 {
                     "name": "Mavericks",
                     "league": "NBA",
                     "api_id": 1610612742,
-                    "abbr": "DAL"
+                    "abbr": "DAL",
+                    "full_name": "Dallas Mavericks"
                 },
                 {
                     "name": "Rangers",
                     "league": "MLB",
                     "api_id": 140,
-                    "abbr": "TEX"
+                    "abbr": "TEX",
+                    "full_name": "Texas Rangers"
                 },
                 {
                     "name": "Stars",
                     "league": "NHL",
                     "api_id": 15,
-                    "abbr": "DAL"
+                    "abbr": "DAL",
+                    "full_name": "Dallas Stars"
                 }
             ]
         },
@@ -170,37 +193,43 @@
                     "name": "Raiders",
                     "league": "NFL",
                     "api_id": 2520,
-                    "abbr": "OAK"
+                    "abbr": "OAK",
+                    "full_name": "Oakland Raiders"
                 },
                 {
                     "name": "Warriors",
                     "league": "NBA",
                     "api_id": 1610612744,
-                    "abbr": "GSW"
+                    "abbr": "GSW",
+                    "full_name": "Golden State Warriors"
                 },
                 {
                     "name": "Athletics",
                     "league": "MLB",
                     "api_id": 133,
-                    "abbr": "OAK"
+                    "abbr": "OAK",
+                    "full_name": "Oakland Athletics"
                 },
                 {
                     "name": "49ers",
                     "league": "NFL",
                     "api_id": 4500,
-                    "abbr": "SF"
+                    "abbr": "SF",
+                    "full_name": "San Francisco 49ers"
                 },
                 {
                     "name": "Giants",
                     "league": "MLB",
                     "api_id": 137,
-                    "abbr": "SF"
+                    "abbr": "SF",
+                    "full_name": "San Francisco Giants"
                 },
                 {
                     "name": "Sharks",
                     "league": "NHL",
                     "api_id": 29,
-                    "abbr": "SJS"
+                    "abbr": "SJS",
+                    "full_name": "San Jose Sharks"
                 }
             ]
         },
@@ -212,25 +241,29 @@
                     "name": "Commanders",
                     "league": "NFL",
                     "api_id": 5110,
-                    "abbr": "WAS"
+                    "abbr": "WAS",
+                    "full_name": "Washington Commanders"
                 },
                 {
                     "name": "Wizards",
                     "league": "NBA",
                     "api_id": 1610612764,
-                    "abbr": "WAS"
+                    "abbr": "WAS",
+                    "full_name": "Washington Wizards"
                 },
                 {
                     "name": "Nationals",
                     "league": "MLB",
                     "api_id": 120,
-                    "abbr": "WSH"
+                    "abbr": "WSH",
+                    "full_name": "Washington Nationals"
                 },
                 {
                     "name": "Capitals",
                     "league": "NHL",
                     "api_id": 24,
-                    "abbr": "WSH"
+                    "abbr": "WSH",
+                    "full_name": "Washington Capitals"
                 }
             ]
         },
@@ -242,25 +275,29 @@
                     "name": "Patriots",
                     "league": "NFL",
                     "api_id": 3200,
-                    "abbr": "NE"
+                    "abbr": "NE",
+                    "full_name": "New England Patriots"
                 },
                 {
                     "name": "Celtics",
                     "league": "NBA",
                     "api_id": 1610612738,
-                    "abbr": "BOS"
+                    "abbr": "BOS",
+                    "full_name": "Boston Celtics"
                 },
                 {
                     "name": "Red Sox",
                     "league": "MLB",
                     "api_id": 111,
-                    "abbr": "BOS"
+                    "abbr": "BOS",
+                    "full_name": "Boston Red Sox"
                 },
                 {
                     "name": "Bruins",
                     "league": "NHL",
                     "api_id": 6,
-                    "abbr": "BOS"
+                    "abbr": "BOS",
+                    "full_name": "Boston Bruins"
                 }
             ]
         },
@@ -272,25 +309,29 @@
                     "name": "Eagles",
                     "league": "NFL",
                     "api_id": 3700,
-                    "abbr": "PHI"
+                    "abbr": "PHI",
+                    "full_name": "Philadelphia Eagles"
                 },
                 {
                     "name": "76ers",
                     "league": "NBA",
                     "api_id": 1610612755,
-                    "abbr": "PHI"
+                    "abbr": "PHI",
+                    "full_name": "Philadelphia 76ers"
                 },
                 {
                     "name": "Phillies",
                     "league": "MLB",
                     "api_id": 143,
-                    "abbr": "PHI"
+                    "abbr": "PHI",
+                    "full_name": "Philadelphia Phillies"
                 },
                 {
                     "name": "Flyers",
                     "league": "NHL",
                     "api_id": 16,
-                    "abbr": "PHI"
+                    "abbr": "PHI",
+                    "full_name": "Philadelphia Flyers"
                 }
             ]
         },
@@ -302,25 +343,29 @@
                     "name": "Dolphins",
                     "league": "NFL",
                     "api_id": 2700,
-                    "abbr": "MIA"
+                    "abbr": "MIA",
+                    "full_name": "Miami Dolphins"
                 },
                 {
                     "name": "Heat",
                     "league": "NBA",
                     "api_id": 1610612748,
-                    "abbr": "MIA"
+                    "abbr": "MIA",
+                    "full_name": "Miami Heat"
                 },
                 {
                     "name": "Marlins",
                     "league": "MLB",
                     "api_id": 146,
-                    "abbr": "MIA"
+                    "abbr": "MIA",
+                    "full_name": "Miami Marlins"
                 },
                 {
                     "name": "Panthers",
                     "league": "NHL",
                     "api_id": 33,
-                    "abbr": "FLA"
+                    "abbr": "FLA",
+                    "full_name": "Florida Panthers"
                 }
             ]
         },
@@ -332,19 +377,22 @@
                     "name": "Falcons",
                     "league": "NFL",
                     "api_id": 200,
-                    "abbr": "ATL"
+                    "abbr": "ATL",
+                    "full_name": "Atlanta Falcons"
                 },
                 {
                     "name": "Hawks",
                     "league": "NBA",
                     "api_id": 1610612737,
-                    "abbr": "ATL"
+                    "abbr": "ATL",
+                    "full_name": "Atlanta Hawks"
                 },
                 {
                     "name": "Braves",
                     "league": "MLB",
                     "api_id": 144,
-                    "abbr": "ATL"
+                    "abbr": "ATL",
+                    "full_name": "Atlanta Braves"
                 }
             ]
         },
@@ -356,25 +404,29 @@
                     "name": "Lions",
                     "league": "NFL",
                     "api_id": 1540,
-                    "abbr": "DET"
+                    "abbr": "DET",
+                    "full_name": "Detroit Lions"
                 },
                 {
                     "name": "Pistons",
                     "league": "NBA",
                     "api_id": 1610612765,
-                    "abbr": "DET"
+                    "abbr": "DET",
+                    "full_name": "Detroit Pistons"
                 },
                 {
                     "name": "Tigers",
                     "league": "MLB",
                     "api_id": 116,
-                    "abbr": "DET"
+                    "abbr": "DET",
+                    "full_name": "Detroit Tigers"
                 },
                 {
                     "name": "Red Wings",
                     "league": "NHL",
                     "api_id": 12,
-                    "abbr": "DET"
+                    "abbr": "DET",
+                    "full_name": "Detroit Red Wings"
                 }
             ]
         },
@@ -386,25 +438,29 @@
                     "name": "Browns",
                     "league": "NFL",
                     "api_id": 1050,
-                    "abbr": "CLE"
+                    "abbr": "CLE",
+                    "full_name": "Cleveland Browns"
                 },
                 {
                     "name": "Cavaliers",
                     "league": "NBA",
                     "api_id": 1610612739,
-                    "abbr": "CLE"
+                    "abbr": "CLE",
+                    "full_name": "Cleveland Cavaliers"
                 },
                 {
                     "name": "Guardians",
                     "league": "MLB",
                     "api_id": 114,
-                    "abbr": "CLE"
+                    "abbr": "CLE",
+                    "full_name": "Cleveland Guardians"
                 },
                 {
                     "name": "Blue Jackets",
                     "league": "NHL",
                     "api_id": 36,
-                    "abbr": "CBJ"
+                    "abbr": "CBJ",
+                    "full_name": "Columbus Blue Jackets"
                 }
             ]
         },
@@ -416,19 +472,22 @@
                     "name": "Steelers",
                     "league": "NFL",
                     "api_id": 3900,
-                    "abbr": "PIT"
+                    "abbr": "PIT",
+                    "full_name": "Pittsburgh Steelers"
                 },
                 {
                     "name": "Penguins",
                     "league": "NHL",
                     "api_id": 17,
-                    "abbr": "PIT"
+                    "abbr": "PIT",
+                    "full_name": "Pittsburgh Penguins"
                 },
                 {
                     "name": "Pirates",
                     "league": "MLB",
                     "api_id": 134,
-                    "abbr": "PIT"
+                    "abbr": "PIT",
+                    "full_name": "Pittsburgh Pirates"
                 }
             ]
         },
@@ -440,25 +499,29 @@
                     "name": "Vikings",
                     "league": "NFL",
                     "api_id": 3000,
-                    "abbr": "MIN"
+                    "abbr": "MIN",
+                    "full_name": "Minnesota Vikings"
                 },
                 {
                     "name": "Timberwolves",
                     "league": "NBA",
                     "api_id": 1610612750,
-                    "abbr": "MIN"
+                    "abbr": "MIN",
+                    "full_name": "Minnesota Timberwolves"
                 },
                 {
                     "name": "Twins",
                     "league": "MLB",
                     "api_id": 142,
-                    "abbr": "MIN"
+                    "abbr": "MIN",
+                    "full_name": "Minnesota Twins"
                 },
                 {
                     "name": "Wild",
                     "league": "NHL",
                     "api_id": 37,
-                    "abbr": "MIN"
+                    "abbr": "MIN",
+                    "full_name": "Minnesota Wild"
                 }
             ]
         },
@@ -470,19 +533,22 @@
                     "name": "Packers",
                     "league": "NFL",
                     "api_id": 1800,
-                    "abbr": "GB"
+                    "abbr": "GB",
+                    "full_name": "Green Bay Packers"
                 },
                 {
                     "name": "Bucks",
                     "league": "NBA",
                     "api_id": 1610612749,
-                    "abbr": "MIL"
+                    "abbr": "MIL",
+                    "full_name": "Milwaukee Bucks"
                 },
                 {
                     "name": "Brewers",
                     "league": "MLB",
                     "api_id": 158,
-                    "abbr": "MIL"
+                    "abbr": "MIL",
+                    "full_name": "Milwaukee Brewers"
                 }
             ]
         },
@@ -494,19 +560,22 @@
                     "name": "Rams",
                     "league": "NFL",
                     "api_id": 2510,
-                    "abbr": "STL"
+                    "abbr": "STL",
+                    "full_name": "St. Louis Rams"
                 },
                 {
                     "name": "Cardinals",
                     "league": "MLB",
                     "api_id": 138,
-                    "abbr": "STL"
+                    "abbr": "STL",
+                    "full_name": "St. Louis Cardinals"
                 },
                 {
                     "name": "Blues",
                     "league": "NHL",
                     "api_id": 18,
-                    "abbr": "STL"
+                    "abbr": "STL",
+                    "full_name": "St. Louis Blues"
                 }
             ]
         },
@@ -518,19 +587,22 @@
                     "name": "Buccaneers",
                     "league": "NFL",
                     "api_id": 4900,
-                    "abbr": "TB"
+                    "abbr": "TB",
+                    "full_name": "Tampa Bay Buccaneers"
                 },
                 {
                     "name": "Lightning",
                     "league": "NHL",
                     "api_id": 31,
-                    "abbr": "TBL"
+                    "abbr": "TBL",
+                    "full_name": "Tampa Bay Lightning"
                 },
                 {
                     "name": "Rays",
                     "league": "MLB",
                     "api_id": 139,
-                    "abbr": "TB"
+                    "abbr": "TB",
+                    "full_name": "Tampa Bay Rays"
                 }
             ]
         },
@@ -542,25 +614,29 @@
                     "name": "Broncos",
                     "league": "NFL",
                     "api_id": 1400,
-                    "abbr": "DEN"
+                    "abbr": "DEN",
+                    "full_name": "Denver Broncos"
                 },
                 {
                     "name": "Nuggets",
                     "league": "NBA",
                     "api_id": 1610612743,
-                    "abbr": "DEN"
+                    "abbr": "DEN",
+                    "full_name": "Denver Nuggets"
                 },
                 {
                     "name": "Rockies",
                     "league": "MLB",
                     "api_id": 115,
-                    "abbr": "COL"
+                    "abbr": "COL",
+                    "full_name": "Colorado Rockies"
                 },
                 {
                     "name": "Avalanche",
                     "league": "NHL",
                     "api_id": 27,
-                    "abbr": "COL"
+                    "abbr": "COL",
+                    "full_name": "Colorado Avalanche"
                 }
             ]
         },
@@ -572,25 +648,29 @@
                     "name": "Seahawks",
                     "league": "NFL",
                     "api_id": 4600,
-                    "abbr": "SEA"
+                    "abbr": "SEA",
+                    "full_name": "Seattle Seahawks"
                 },
                 {
                     "name": "Mariners",
                     "league": "MLB",
                     "api_id": 136,
-                    "abbr": "SEA"
+                    "abbr": "SEA",
+                    "full_name": "Seattle Mariners"
                 },
                 {
                     "name": "Kraken",
                     "league": "NHL",
                     "api_id": 39,
-                    "abbr": "SEA"
+                    "abbr": "SEA",
+                    "full_name": "Seattle Kraken"
                 },
                 {
                     "name": "Supersonics",
                     "league": "NBA",
                     "api_id": 1610612760,
-                    "abbr": "SEA"
+                    "abbr": "SEA",
+                    "full_name": "Seattle SuperSonics"
                 }
             ]
         },
@@ -602,19 +682,22 @@
                     "name": "Texans",
                     "league": "NFL",
                     "api_id": 2120,
-                    "abbr": "HOU"
+                    "abbr": "HOU",
+                    "full_name": "Houston Texans"
                 },
                 {
                     "name": "Rockets",
                     "league": "NBA",
                     "api_id": 1610612745,
-                    "abbr": "HOU"
+                    "abbr": "HOU",
+                    "full_name": "Houston Rockets"
                 },
                 {
                     "name": "Astros",
                     "league": "MLB",
                     "api_id": 117,
-                    "abbr": "HOU"
+                    "abbr": "HOU",
+                    "full_name": "Houston Astros"
                 }
             ]
         },
@@ -626,25 +709,29 @@
                     "name": "Cardinals",
                     "league": "NFL",
                     "api_id": 3800,
-                    "abbr": "ARI"
+                    "abbr": "ARI",
+                    "full_name": "Arizona Cardinals"
                 },
                 {
                     "name": "Suns",
                     "league": "NBA",
                     "api_id": 1610612756,
-                    "abbr": "PHX"
+                    "abbr": "PHX",
+                    "full_name": "Phoenix Suns"
                 },
                 {
                     "name": "Diamondbacks",
                     "league": "MLB",
                     "api_id": 109,
-                    "abbr": "ARI"
+                    "abbr": "ARI",
+                    "full_name": "Arizona Diamondbacks"
                 },
                 {
                     "name": "Coyotes",
                     "league": "NHL",
                     "api_id": 40,
-                    "abbr": "ARI"
+                    "abbr": "ARI",
+                    "full_name": "Arizona Coyotes"
                 }
             ]
         },
@@ -656,19 +743,22 @@
                     "name": "Titans",
                     "league": "NFL",
                     "api_id": 2100,
-                    "abbr": "TEN"
+                    "abbr": "TEN",
+                    "full_name": "Tennessee Titans"
                 },
                 {
                     "name": "Predators",
                     "league": "NHL",
                     "api_id": 34,
-                    "abbr": "NSH"
+                    "abbr": "NSH",
+                    "full_name": "Nashville Predators"
                 },
                 {
                     "name": "Grizzlies",
                     "league": "NBA",
                     "api_id": 1610612763,
-                    "abbr": "MEM"
+                    "abbr": "MEM",
+                    "full_name": "Memphis Grizzlies"
                 }
             ]
         },
@@ -680,19 +770,22 @@
                     "name": "Raptors",
                     "league": "NBA",
                     "api_id": 1610612761,
-                    "abbr": "TOR"
+                    "abbr": "TOR",
+                    "full_name": "Toronto Raptors"
                 },
                 {
                     "name": "Blue Jays",
                     "league": "MLB",
                     "api_id": 141,
-                    "abbr": "TOR"
+                    "abbr": "TOR",
+                    "full_name": "Toronto Blue Jays"
                 },
                 {
                     "name": "Maple Leafs",
                     "league": "NHL",
                     "api_id": 5,
-                    "abbr": "TOR"
+                    "abbr": "TOR",
+                    "full_name": "Toronto Maple Leafs"
                 }
             ]
         },
@@ -704,19 +797,22 @@
                     "name": "Panthers",
                     "league": "NFL",
                     "api_id": 750,
-                    "abbr": "CAR"
+                    "abbr": "CAR",
+                    "full_name": "Carolina Panthers"
                 },
                 {
                     "name": "Hornets",
                     "league": "NBA",
                     "api_id": 1610612766,
-                    "abbr": "CHA"
+                    "abbr": "CHA",
+                    "full_name": "Charlotte Hornets"
                 },
                 {
                     "name": "Hurricanes",
                     "league": "NHL",
                     "api_id": 26,
-                    "abbr": "CAR"
+                    "abbr": "CAR",
+                    "full_name": "Carolina Hurricanes"
                 }
             ]
         }
