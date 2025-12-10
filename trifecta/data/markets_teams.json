@@ -1,7 +1,7 @@
 {
     "markets_teams": [
         {
-            "market": "Greater New York",
+            "market": "New York",
             "count": 9,
             "teams": [
                 {
@@ -124,7 +124,7 @@
             ]
         },
         {
-            "market": "Dallas-Fort Worth",
+            "market": "Dallas",
             "count": 4,
             "teams": [
                 {
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "market": "Washington DC",
+            "market": "DC",
             "count": 5,
             "teams": [
                 {
@@ -431,7 +431,7 @@
             ]
         },
         {
-            "market": "St. Louis",
+            "market": "St Louis",
             "count": 3,
             "teams": [
                 {
