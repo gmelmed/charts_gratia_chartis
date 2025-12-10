@@ -1,7 +1,7 @@
 {
     "markets_teams": [
         {
-            "market": "New York",
+            "market": "NY",
             "count": 9,
             "teams": [
                 {
@@ -47,7 +47,7 @@
             ]
         },
         {
-            "market": "Los Angeles",
+            "market": "LA",
             "count": 8,
             "teams": [
                 {
@@ -150,7 +150,7 @@
             ]
         },
         {
-            "market": "Bay Area",
+            "market": "Bay",
             "count": 6,
             "teams": [
                 {
@@ -384,7 +384,7 @@
             ]
         },
         {
-            "market": "Twin Cities",
+            "market": "Minneapolis",
             "count": 4,
             "teams": [
                 {
@@ -614,7 +614,7 @@
             ]
         },
         {
-            "market": "North Carolina",
+            "market": "NC",
             "count": 3,
             "teams": [
                 {
