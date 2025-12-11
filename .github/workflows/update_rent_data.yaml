@@ -1,5 +1,9 @@
 name: Update Rent Tracker Data
 
+permissions:
+  contents: write   # allows pushing commits
+  actions: read    # allows using actions/checkout
+
 on:
   schedule:
     # Run daily at 12:00 UTC to check if we should run
@@ -108,9 +112,22 @@ jobs:
       if: steps.determine_scripts.outputs.run_zillow == 'true'
       working-directory: rent_tracker
       run: python scripts/05_merge_and_finalize.py
-      
-    - name: Commit and push if changes
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Git user
       run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+
+    - name: Commit and push if changes
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+      run: |
+        git add .
+        git commit -m "Update rent tracker data"
+        git push https://x-access-token:${GH_PAT}@github.com/gmelmed/charts_gratia_chartis.git HEAD:main
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add rent_tracker/data/
