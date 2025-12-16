@@ -1,13 +1,12 @@
 name: Update Rent Tracker Data
 
 permissions:
-  contents: write   # allows pushing commits
-  actions: read    # allows using actions/checkout
+  contents: write
+  actions: read
 
 on:
   schedule:
-    # Run daily at 12:00 UTC to check if we should run
-    - cron: '0 12 * * *'
+    - cron: '0 12 * * *'  # Run daily at 12:00 UTC to check if we should run
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
@@ -38,12 +37,10 @@ jobs:
         
         def get_nth_working_day(year, month, n):
             """Get the nth working day of a given month"""
-            # Start from the first day of the month
             current = datetime(year, month, 1)
             working_days = 0
             
             while working_days < n:
-                # Monday = 0, Sunday = 6
                 if current.weekday() < 5:  # Monday through Friday
                     working_days += 1
                     if working_days == n:
@@ -87,9 +84,20 @@ jobs:
             f.write(f"twelfth_working_day={twelfth_working_day}\n")
             f.write(f"later_day={later_day}\n")
         EOF
+    
+    - name: Check if we should proceed
+      id: should_run
+      run: |
+        if [ "${{ steps.determine_scripts.outputs.run_homebuilding }}" == "false" ]; then
+          echo "Not a scheduled day - skipping all data collection"
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          echo "Scheduled day detected - proceeding with data collection"
+          echo "skip=false" >> $GITHUB_OUTPUT
+        fi
         
     - name: Run homebuilding collection
-      if: steps.determine_scripts.outputs.run_homebuilding == 'true'
+      if: steps.should_run.outputs.skip == 'false'
       working-directory: rent_tracker
       run: python scripts/01_collect_homebuilding.py
       
@@ -113,23 +121,18 @@ jobs:
       working-directory: rent_tracker
       run: python scripts/05_merge_and_finalize.py
 
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Set up Git user
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
-
     - name: Commit and push if changes
-      env:
-        GH_PAT: ${{ secrets.GH_PAT }}
+      if: steps.should_run.outputs.skip == 'false'
       run: |
-        git add .
-        git commit -m "Update rent tracker data"
-        git push https://x-access-token:${GH_PAT}@github.com/gmelmed/charts_gratia_chartis.git HEAD:main
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add rent_tracker/data/
-        git diff --staged --quiet || git commit -m "Update rent tracker data - $(date +'%Y-%m-%d')"
-        git push origin HEAD:main
+        
+        # Only commit if there are changes
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+          exit 0
+        else
+          git commit -m "Update rent tracker data - $(date +'%Y-%m-%d')"
+          git push
+        fi
