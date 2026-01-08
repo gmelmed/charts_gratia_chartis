@@ -1,0 +1,173 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/daily_ridership.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.mode !== 'Access-A-Ride' && datum.mode !== 'Staten Island Railway'"
+    }
+  ],
+  "columns": 2,
+  "facet": {
+    "field": "mode",
+    "type": "ordinal",
+    "sort": {"op": "min", "field": "date"},
+    "title": null
+  },
+  "spec": {
+    "width": 350,
+    "height": 250,
+    "encoding": {
+      "x": {
+        "field": "date",
+        "type": "temporal",
+        "axis": {
+          "format": "%Y",
+          "tickCount": "year"
+        }
+      }
+    },
+    "layer": [
+      {
+        "encoding": {
+          "y": {
+            "field": "count_ma30",
+            "type": "quantitative",
+            "scale": {"type": "linear", "zero": false},
+            "title": null,
+            "axis": {"format": "~s"}
+          },
+          "tooltip": [
+            {
+              "field": "date",
+              "type": "temporal",
+              "title": "Date",
+              "format": "%B %d, %Y"
+            },
+            {
+              "field": "count_ma30",
+              "type": "quantitative",
+              "title": "Count",
+              "format": ",.0f"
+            },
+            {"field": "mode", "type": "nominal", "title": "mode"}
+          ]
+        },
+        "layer": [
+          {"mark": {"type": "line", "color": "#4269d0"}},
+          {
+            "transform": [{"filter": {"param": "hover", "empty": false}}],
+            "mark": {
+              "type": "point",
+              "filled": true,
+              "size": 60,
+              "color": "#4269d0"
+            }
+          }
+        ]
+      },
+      {
+        "mark": "rule",
+        "encoding": {
+          "opacity": {
+            "condition": {"value": 0.3, "param": "hover", "empty": false},
+            "value": 0
+          },
+          "tooltip": [
+            {
+              "field": "date",
+              "type": "temporal",
+              "format": "%B %d, %Y",
+              "title": "Date"
+            },
+            {
+              "field": "count_ma30",
+              "type": "quantitative",
+              "format": ",.0f",
+              "title": "30-day Moving Average"
+            }
+          ]
+        },
+        "params": [
+          {
+            "name": "hover",
+            "select": {
+              "type": "point",
+              "fields": ["date", "mode"],
+              "nearest": true,
+              "on": "pointerover",
+              "clear": "pointerout"
+            }
+          }
+        ]
+      },
+      {
+        "mark": {
+          "type": "rule",
+          "color": "#676A86",
+          "strokeWidth": 2,
+          "strokeDash": [4, 4]
+        },
+        "encoding": {
+          "x": {
+            "datum": {"year": 2025, "month": 1, "date": 5}
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {"scale": {"y": "independent"}},
+  "title": {
+    "text": "Ridership is up in all major forms of NYC public transit.",
+    "subtitle": ["","Data: MTA", ""]
+  },
+  "config": {
+    "font": "Montserrat, sans-serif",
+    "view": {"stroke": "transparent"},
+    "background": "#f7f7f7",
+    "range": {"category": {"scheme": "observable10"}},
+    "axis": {
+      "labelColor": "#676A86",
+      "labelFontSize": 11,
+      "labelFont": "Montserrat, sans-serif",
+      "labelOpacity": 0.7,
+      "tickColor": "#676A86",
+      "tickOpacity": 0.5,
+      "domainColor": "#676A86",
+      "domainOpacity": 0.5,
+      "gridColor": "#676A86",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.5,
+      "title": null,
+      "titleColor": "#676A86",
+      "titleOpacity": 0.8,
+      "tickSize": 4
+    },
+    "axisXTemporal": {"grid": false},
+    "axisYQuantitative": {
+      "gridColor": "#676A86",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.5,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 4,
+      "titleAngle": 0,
+      "titleAlign": "left",
+      "titleBaseline": "bottom",
+      "titleX": 0,
+      "titleY": -5
+    },
+    "title": {
+      "font": "Montserrat, sans-serif",
+      "fontSize": 20,
+      "color": "#1a1a1a",
+      "subtitleFontSize": 16,
+      "subtitleColor": "#676A86"
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelFont": "Montserrat, sans-serif"
+    }
+  }
+}
