@@ -5,6 +5,9 @@ import time
 import random
 import json
 from datetime import date
+import requests
+from io import BytesIO
+import xlrd
 
 import sys
 sys.path.append('.')
@@ -17,10 +20,27 @@ from utils.cleaners import clean_metro_name
 
 def process_2024_data(url, headers):
     """Process data from 2024 onwards."""
-    df = pd.read_excel(url, skiprows=7, storage_options=headers)
-    
-    # Clean columns
-    df.drop(columns=['Metro /Micro Code', 'Unnamed: 10'], inplace=True)
+    # Download file with headers
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+
+    # Read Excel using xlrd directly to bypass pandas version check
+    book = xlrd.open_workbook(file_contents=response.content)
+    sheet = book.sheet_by_index(0)
+
+    # Convert to dataframe, skipping first 7 rows
+    data = []
+    for row_idx in range(7, sheet.nrows):
+        data.append([sheet.cell_value(row_idx, col_idx) for col_idx in range(sheet.ncols)])
+
+    # Get headers from row 7 (index 7)
+    headers_row = [sheet.cell_value(7, col_idx) for col_idx in range(sheet.ncols)]
+    df = pd.DataFrame(data[1:], columns=headers_row)
+
+    # Clean columns - drop empty column and metro/micro code
+    df = df.loc[:, df.columns != '']  # Remove empty column names
+    if 'Metro /Micro Code' in df.columns:
+        df.drop(columns=['Metro /Micro Code'], inplace=True)
     
     # Clean column names and data
     df.columns = df.columns.str.replace('.1', '_ytd')
@@ -35,11 +55,27 @@ def process_2024_data(url, headers):
 
 def process_2022_2023_data(url, headers):
     """Process data from 2022-2023."""
-    df = pd.read_excel(url, skiprows=7, storage_options=headers)
-    
+    # Download file with headers
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+
+    # Read Excel using xlrd directly to bypass pandas version check
+    book = xlrd.open_workbook(file_contents=response.content)
+    sheet = book.sheet_by_index(0)
+
+    # Convert to dataframe, skipping first 7 rows
+    data = []
+    for row_idx in range(7, sheet.nrows):
+        data.append([sheet.cell_value(row_idx, col_idx) for col_idx in range(sheet.ncols)])
+
+    # Get headers from row 7 (index 7)
+    headers_row = [sheet.cell_value(7, col_idx) for col_idx in range(sheet.ncols)]
+    df = pd.DataFrame(data[1:], columns=headers_row)
+
     # Remove first row and clean columns
-    df = df.iloc[1:]
-    df.drop(columns=['Unnamed: 9'], inplace=True)
+    df = df.loc[:, df.columns != '']  # Remove empty column names
+    if 'Metro /Micro Code' in df.columns:
+        df.drop(columns=['Metro /Micro Code'], inplace=True)
     
     # Clean column names and data
     df.columns = df.columns.str.replace('.1', '_ytd')
@@ -54,11 +90,29 @@ def process_2022_2023_data(url, headers):
 
 def process_pre_2022_data(url, headers):
     """Process data from 2021 and earlier."""
-    df = pd.read_excel(url, skiprows=7, storage_options=headers)
-    
+    # Download file with headers
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+
+    # Read Excel using xlrd directly to bypass pandas version check
+    book = xlrd.open_workbook(file_contents=response.content)
+    sheet = book.sheet_by_index(0)
+
+    # Convert to dataframe, skipping first 7 rows
+    data = []
+    for row_idx in range(7, sheet.nrows):
+        data.append([sheet.cell_value(row_idx, col_idx) for col_idx in range(sheet.ncols)])
+
+    # Get headers from row 7 (index 7)
+    headers_row = [sheet.cell_value(7, col_idx) for col_idx in range(sheet.ncols)]
+    df = pd.DataFrame(data[1:], columns=headers_row)
+
     # Remove first row and clean columns
-    df = df.iloc[1:]
-    df.drop(columns=['Monthly Coverage Percent*', 'Unnamed: 10'], inplace=True)
+    df = df.loc[:, df.columns != '']  # Remove empty column names
+    if 'Monthly Coverage Percent*' in df.columns:
+        df.drop(columns=['Monthly Coverage Percent*'], inplace=True)
+    if 'Metro /Micro Code' in df.columns:
+        df.drop(columns=['Metro /Micro Code'], inplace=True)
     
     # Clean column names and data
     df.columns = df.columns.str.replace('.1', '_ytd')
@@ -136,14 +190,17 @@ def collect_homebuilding_data():
         
         # Clean up the name column
         homebuilding['Name'] = homebuilding['Name'].apply(clean_metro_name)
-        
+
+        # Remove duplicate columns (keep first occurrence only)
+        homebuilding = homebuilding.loc[:, ~homebuilding.columns.duplicated()]
+
         # Select and rename columns - KEEPING ALL UNIT TYPES
         homebuilding = homebuilding[['Name', 'Total', '1 Unit', '2 Units', '3 and 4 Units',
                                       '5 Units or More', 'date']]
-        
+
         # Calculate multi-unit total
-        homebuilding['multi_total'] = (homebuilding['2 Units'] + 
-                                        homebuilding['3 and 4 Units'] + 
+        homebuilding['multi_total'] = (homebuilding['2 Units'] +
+                                        homebuilding['3 and 4 Units'] +
                                         homebuilding['5 Units or More'])
         
         # Save ALL metro areas version
