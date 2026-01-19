@@ -1,0 +1,170 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/air_quality_nyc_daily.csv"
+  },
+  "transform": [
+    {"filter": "toDate(datum.date) >= toDate('2024-01-01')"},
+    {"filter": "datum.measure === 'daily_low_90d_ma' || datum.measure === 'daily_high_90d_ma'"}
+  ],
+  "columns": 2,
+  "facet": {
+    "field": "site_name",
+    "type": "nominal",
+    "title": null
+  },
+  "spec": {
+    "width": 350,
+    "height": 250,
+    "encoding": {
+      "x": {
+        "field": "date",
+        "type": "temporal",
+        "axis": {
+          "format": "%Y",
+          "tickCount": "year"
+        }
+      },
+      "y": {
+        "field": "concentration",
+        "type": "quantitative",
+        "scale": {"type": "linear", "zero": false},
+        "title": null,
+        "axis": {"format": "~s"}
+      },
+      "color": {
+        "field": "measure",
+        "type": "nominal",
+        "title": "Measure"
+      }
+    },
+    "layer": [
+      {
+        "mark": {"type": "line"}
+      },
+      {
+        "transform": [{"filter": {"param": "hover", "empty": false}}],
+        "mark": {
+          "type": "point",
+          "filled": true,
+          "size": 60
+        }
+      },
+      {
+        "mark": "rule",
+        "encoding": {
+          "opacity": {
+            "condition": {"value": 0.3, "param": "hover", "empty": false},
+            "value": 0
+          },
+          "tooltip": [
+            {
+              "field": "date",
+              "type": "temporal",
+              "format": "%B %d, %Y",
+              "title": "Date"
+            },
+            {
+              "field": "measure",
+              "type": "nominal",
+              "title": "Measure"
+            },
+            {
+              "field": "concentration",
+              "type": "quantitative",
+              "format": ",.1f",
+              "title": "Concentration (µg/m³)"
+            },
+            {
+              "field": "site_name",
+              "type": "nominal",
+              "title": "Site"
+            }
+          ]
+        },
+        "params": [
+          {
+            "name": "hover",
+            "select": {
+              "type": "point",
+              "fields": ["date", "site_name"],
+              "nearest": true,
+              "on": "pointerover",
+              "clear": "pointerout"
+            }
+          }
+        ]
+      },
+      {
+        "mark": {
+          "type": "rule",
+          "color": "#676A86",
+          "strokeWidth": 2,
+          "strokeDash": [4, 4]
+        },
+        "encoding": {
+          "x": {
+            "datum": {"year": 2025, "month": 1, "date": 5}
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {"scale": {"y": "independent"}},
+  "title": {
+    "text": "PM2.5 Air Quality by Monitoring Site",
+    "subtitle": [
+      "Daily high and low concentrations.",
+      "Vertical line represents introduction of congestion pricing.",
+      "Data: NYC Open Data."
+    ]
+  },
+  "config": {
+    "font": "Biennale, sans-serif",
+    "view": {"stroke": "transparent"},
+    "background": "#f7f7f7",
+    "range": {"category": {"scheme": "observable10"}},
+    "axis": {
+      "labelColor": "#676A86",
+      "labelFontSize": 11,
+      "labelFont": "Biennale, sans-serif",
+      "labelOpacity": 0.7,
+      "tickColor": "#676A86",
+      "tickOpacity": 0.5,
+      "domainColor": "#676A86",
+      "domainOpacity": 0.5,
+      "gridColor": "#676A86",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.5,
+      "title": null,
+      "titleColor": "#676A86",
+      "titleOpacity": 0.8,
+      "tickSize": 4
+    },
+    "axisXTemporal": {"grid": false},
+    "axisYQuantitative": {
+      "gridColor": "#676A86",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.5,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 4,
+      "titleAngle": 0,
+      "titleAlign": "left",
+      "titleBaseline": "bottom",
+      "titleX": 0,
+      "titleY": -5
+    },
+    "title": {
+      "font": "Lexend, sans-serif",
+      "fontSize": 20,
+      "color": "#1a1a1a",
+      "subtitleFontSize": 16,
+      "subtitleColor": "#676A86"
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelFont": "Lexend, sans-serif"
+    }
+  }
+}
