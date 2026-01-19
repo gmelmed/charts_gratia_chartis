@@ -1,12 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/daily_ridership.csv"
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/daily_ridership.csv"
   },
   "transform": [
-    {
-      "filter": "datum.mode !== 'Access-A-Ride' && datum.mode !== 'Staten Island Railway'"
-    }
+    {"filter": "toDate(datum.date) >= toDate('2024-06-01')"}
   ],
   "columns": 2,
   "facet": {
@@ -32,7 +30,7 @@
       {
         "encoding": {
           "y": {
-            "field": "count_ma30",
+            "field": "count_sa_ma90",
             "type": "quantitative",
             "scale": {"type": "linear", "zero": false},
             "title": null,
@@ -46,7 +44,7 @@
               "format": "%B %d, %Y"
             },
             {
-              "field": "count_ma30",
+              "field": "count_sa_ma90",
               "type": "quantitative",
               "title": "Count",
               "format": ",.0f"
@@ -82,10 +80,10 @@
               "title": "Date"
             },
             {
-              "field": "count_ma30",
+              "field": "count_sa_ma90",
               "type": "quantitative",
               "format": ",.0f",
-              "title": "30-day Moving Average"
+              "title": "Seasonally Adjusted 90-day Moving Average"
             }
           ]
         },
@@ -120,17 +118,21 @@
   "resolve": {"scale": {"y": "independent"}},
   "title": {
     "text": "Ridership is up in all major forms of NYC public transit.",
-    "subtitle": ["","Data: MTA", ""]
+    "subtitle": [
+      "90-day moving average of seasonally-adjusted daily ridership.",
+      "Vertical line represents introduction of congestion pricing.",
+      "Data: Author's Calculations via MTA.",
+      ""]
   },
   "config": {
-    "font": "Montserrat, sans-serif",
+    "font": "Biennale, sans-serif",
     "view": {"stroke": "transparent"},
     "background": "#f7f7f7",
     "range": {"category": {"scheme": "observable10"}},
     "axis": {
       "labelColor": "#676A86",
       "labelFontSize": 11,
-      "labelFont": "Montserrat, sans-serif",
+      "labelFont": "Biennale, sans-serif",
       "labelOpacity": 0.7,
       "tickColor": "#676A86",
       "tickOpacity": 0.5,
@@ -159,7 +161,7 @@
       "titleY": -5
     },
     "title": {
-      "font": "Montserrat, sans-serif",
+      "font": "Lexend, sans-serif",
       "fontSize": 20,
       "color": "#1a1a1a",
       "subtitleFontSize": 16,
@@ -167,7 +169,7 @@
     },
     "header": {
       "labelFontSize": 12,
-      "labelFont": "Montserrat, sans-serif"
+      "labelFont": "Lexend, sans-serif"
     }
   }
 }
