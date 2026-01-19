@@ -5,3 +5,8 @@ __pycache__/
 
 # Ignore .txt files with api_key in the filename
 *api_key*.txt
+
+# Data files
+*.duckdb
+*.duckdb.wal
+download_log.txt
