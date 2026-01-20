@@ -4,8 +4,9 @@
     "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/air_quality_nyc_daily.csv"
   },
   "transform": [
-    {"filter": "toDate(datum.date) >= toDate('2024-01-01')"},
-    {"filter": "datum.measure === 'daily_low_90d_ma' || datum.measure === 'daily_high_90d_ma'"}
+    {"filter": "toDate(datum.date) >= toDate('2024-09-01')"},
+    {"filter": "datum.measure === 'daily_low_90d_ma' || datum.measure === 'daily_high_90d_ma'"},
+    {"filter": "datum.site_name != 'Midtown-DOT (Manhattan)'"}
   ],
   "columns": 2,
   "facet": {
@@ -35,7 +36,15 @@
       "color": {
         "field": "measure",
         "type": "nominal",
-        "title": "Measure"
+        "scale": {
+          "domain": ["daily_high_90d_ma", "daily_low_90d_ma"],
+          "range": ["#4269d0", "#efb118"]
+        },
+        "legend": {
+          "title": null,
+          "orient": "top",
+          "labelExpr": "datum.value === 'daily_high_90d_ma' ? 'Daily High' : 'Daily Low'"
+        }
       }
     },
     "layer": [
@@ -116,7 +125,8 @@
     "subtitle": [
       "Daily high and low concentrations.",
       "Vertical line represents introduction of congestion pricing.",
-      "Data: NYC Open Data."
+      "Data: NYC Open Data.",
+      ""
     ]
   },
   "config": {
