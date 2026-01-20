@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/crime_data.csv"
+  },
+  "transform": [
+    {"filter": "toDate(datum.Month) >= toDate('2024-01-01')"},
+    {"filter": "toDate(datum.Month) <= toDate('2025-10-01')"}
+  ],
+  "width": 600,
+  "height": 400,
+  "layer": [
+    {
+      "mark": {
+        "type":"bar",
+        "width": 20
+        },
+      "encoding": {
+        "x": {
+          "field": "Month",
+          "type": "temporal",
+          "scale": {"padding": 20},
+          "axis": {
+            "format": "%b %Y",
+            "labelAngle": -45
+          },
+          "title": null
+        },
+        "y": {
+          "field": "Crimes per Million Riders",
+          "type": "quantitative",
+          "title": null
+        },
+        "color": {
+          "field": "Felony Type",
+          "type": "nominal",
+          "legend": {
+            "title": null,
+            "orient": "top"
+          }
+        },
+        "tooltip": [
+          {"field": "Month", "type": "temporal", "title": "Month", "format": "%B %Y"},
+          {"field": "Felony Type", "type": "nominal", "title": "Felony Type"},
+          {"field": "Felony Count", "type": "quantitative", "title": "Felony Count"},
+          {"field": "Crimes per Million Riders", "type": "quantitative", "title": "Crimes per Million Riders", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#676A86",
+        "strokeWidth": 2,
+        "strokeDash": [4, 4]
+      },
+      "encoding": {
+        "x": {
+          "datum": {"year": 2025, "month": 1, "date": 5}
+        }
+      }
+    }
+  ],
+  "title": {
+    "text": "The subway is becoming safer.",
+    "subtitle": [
+      "Felony crimes per million riders by type, 2024-2025.",
+      "Vertical line represents introduction of congestion pricing.",
+      "Data: MTA/NYPD.",
+      ""
+    ]
+  },
+  "config": {
+    "font": "Biennale, sans-serif",
+    "view": {"stroke": "transparent"},
+    "background": "#f7f7f7",
+    "range": {"category": {"scheme": "observable10"}},
+    "axis": {
+      "labelColor": "#676A86",
+      "labelFontSize": 11,
+      "labelFont": "Biennale, sans-serif",
+      "labelOpacity": 0.7,
+      "tickColor": "#676A86",
+      "tickOpacity": 0.5,
+      "domainColor": "#676A86",
+      "domainOpacity": 0.5,
+      "gridColor": "#676A86",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.5,
+      "title": null,
+      "titleColor": "#676A86",
+      "titleOpacity": 0.8,
+      "tickSize": 4
+    },
+    "axisYQuantitative": {
+      "gridColor": "#676A86",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.5,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 4
+    },
+    "axisXTemporal":{
+      "grid": false
+    }
+    ,
+    "title": {
+      "font": "Lexend, sans-serif",
+      "fontSize": 20,
+      "color": "#1a1a1a",
+      "subtitleFontSize": 16,
+      "subtitleColor": "#676A86",
+      "anchor": "start"
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelFont": "Lexend, sans-serif"
+    },
+    "legend": {
+      "title": null,
+      "orient": "top"
+    }
+  }
+}

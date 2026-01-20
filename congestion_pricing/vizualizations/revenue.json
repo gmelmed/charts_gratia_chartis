@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/revenue.csv"
+  },
+  "width": 600,
+  "height": 400,
+  "layer": [
+    {
+      "mark": {
+        "type":"bar",
+        "width": 30
+        },
+      "encoding": {
+        "x": {
+          "field": "Month",
+          "type": "temporal",
+          "scale": {"padding": 20},
+          "axis": {
+            "format": "%b",
+            "labelAngle": -45
+          },
+          "title": null
+        },
+        "y": {
+          "field": "Program Net Revenue",
+          "type": "quantitative",
+          "title": "Net Revenue (Millions USD)"
+        },
+        "color": {
+          "field": "Felony Type",
+          "type": "nominal",
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "Month", "type": "temporal", "title": "Month", "format": "%B %Y"},
+          {"field": "Program Expenses", "type": "quantitative", "title": "Program Expenses (Millions USD)"},
+          {"field": "Toll Revenue", "type": "quantitative", "title": "Toll Revenue (Millions USD)"},
+          {"field": "Program Net Revenue", "type": "quantitative", "title": "Program Net Revenue (Millions USD)", "format": ".2f"}
+        ]
+      }
+    }
+  ],
+  "title": {
+    "text": "Congestion pricing has raised more than 45 million per month.",
+    "subtitle": [
+      "Central business district toll revenue minus program expenses by month in 2025.",
+      "Data: MTA.",
+      ""
+    ]
+  },
+  "config": {
+    "font": "Biennale, sans-serif",
+    "view": {"stroke": "transparent"},
+    "background": "#f7f7f7",
+    "range": {"category": {"scheme": "observable10"}},
+    "axis": {
+      "labelColor": "#676A86",
+      "labelFontSize": 11,
+      "labelFont": "Biennale, sans-serif",
+      "labelOpacity": 0.7,
+      "tickColor": "#676A86",
+      "tickOpacity": 0.5,
+      "domainColor": "#676A86",
+      "domainOpacity": 0.5,
+      "gridColor": "#676A86",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.5,
+      "title": null,
+      "titleColor": "#676A86",
+      "titleOpacity": 0.8,
+      "tickSize": 4
+    },
+    "axisYQuantitative": {
+      "gridColor": "#676A86",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.5,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 4,
+      "titleAngle": 0,
+      "titleAlign": "left",
+      "titleBaseline": "bottom",
+      "titleX": 0,
+      "titleY": -5
+    },
+    "axisXTemporal":{
+      "grid": false
+    }
+    ,
+    "title": {
+      "font": "Lexend, sans-serif",
+      "fontSize": 20,
+      "color": "#1a1a1a",
+      "subtitleFontSize": 16,
+      "subtitleColor": "#676A86",
+      "anchor": "start"
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelFont": "Lexend, sans-serif"
+    },
+    "legend": {
+      "title": null,
+      "orient": "top"
+    }
+  }
+}
