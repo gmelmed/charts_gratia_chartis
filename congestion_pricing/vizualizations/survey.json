@@ -38,26 +38,25 @@
       {"field": "percentage", "type": "quantitative", "format": ".1%", "title": "Percentage"}
     ]
   },
+  "title":{
+    "text": "New Yorkers were split on congestion pricing after its introduction.",
+    "subtitle": [
+      "Data from a Third Avenue Institute poll of NYC registered voters from Jan 13th-31st, 2025 (n=264).",
+      ""
+      ]
+  },
   "width": 600,
   "height": 400,
   "config": {
-    "font": "Lexend, sans-serif",
+    "font": "Biennale, sans-serif",
     "view": {"stroke": "transparent"},
     "background": "#f7f7f7",
-    "range": {
-      "category": [
-        "#E07A5F",
-        "#3D405B",
-        "#81B29A",
-        "#F2CC8F",
-        "#F4F1DE"
-      ]
-    },
-    "point": {"filled": true, "opacity": 0.95},
+    "range": {"category": {"scheme": "observable10"}},
     "axis": {
       "labelColor": "#676A86",
-      "labelFontSize": 12,
-      "labelFont": "Lexend, sans-serif",
+      "labelFontSize": 11,
+      "labelFont": "Biennale, sans-serif",
+      "labelOpacity": 0.7,
       "tickColor": "#676A86",
       "tickOpacity": 0.5,
       "domainColor": "#676A86",
@@ -71,38 +70,23 @@
       "tickSize": 4
     },
     "axisXQuantitative": {
-      "labelAngle": 0,
-      "tickCount": 4 
-    },
-    "axisXTemporal": {"grid": false},
-    "axisYQuantitative": {
-      "gridColor": "#676A86",
-      "gridDash": [1, 5],
-      "gridOpacity": 0.5,
-      "ticks": false,
-      "labelPadding": 5,
-      "tickCount": 8,
-      "titleAngle": 0,
-      "titleAlign": "left",
-      "titleBaseline": "bottom",
-      "titleX": 0,
-      "titleY": -5,
-      "format": ".0%"
-    },
-    "legend": {
-      "titleFont": "Lexend, sans-serif",
-      "titleFontSize": 14,
-      "titleColor": "#1a1a1a",
-      "title": null,
-      "labelColor": "#1a1a1a",
-      "labelFontSize": 12
-    },
+      "grid": false,
+      "tickCount": 5
+      },
     "title": {
       "font": "Lexend, sans-serif",
-      "fontSize": 16,
+      "fontSize": 20,
       "color": "#1a1a1a",
-      "subtitleFontSize": 14,
-      "subtitleColor": "#676A86"
+      "subtitleFontSize": 16,
+      "subtitleColor": "#676A86",
+      "anchor":"start"
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelFont": "Lexend, sans-serif"
+    },
+    "legend": {
+      "title": null
     }
   }
 }

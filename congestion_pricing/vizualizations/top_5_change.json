@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/top_5_by_borough.csv"
+  },
+  "columns": 2,
+  "facet": {
+    "field": "borough",
+    "type": "nominal",
+    "title": null
+  },
+  "resolve": {"scale": {"x": "independent", "y": "independent"}},
+  "spec": {
+    "width": 300,
+    "height": 200,
+    "mark": {
+      "type": "bar",
+      "color": "#4269d0"
+    },
+    "encoding": {
+      "x": {
+        "field": "display_name",
+        "type": "nominal",
+        "axis": {"labelAngle": -45},
+        "sort": "-y",
+        "title": null
+      },
+      "y": {
+        "field": "change_pct",
+        "type": "quantitative",
+        "axis": {"format": ".0%"},
+        "title": null
+      },
+      "tooltip": [
+        {"field": "display_name", "type": "nominal", "title": "Station"},
+        {"field": "change_pct", "type": "quantitative", "title": "Change", "format": ".1%"},
+        {"field": "avg_daily_ridership_24", "type": "quantitative", "title": "2024 Ridership", "format": ",.0f"},
+        {"field": "avg_daily_ridership_25", "type": "quantitative", "title": "2025 Ridership", "format": ",.0f"}
+      ]
+    }
+  },
+  "title": {
+    "text": "Top 5 Ridership Increases by Borough",
+    "subtitle": [
+      "Percent change in average daily ridership, 2024 vs 2025.",
+      "Data: MTA.",
+      ""
+    ]
+  },
+  "config": {
+    "font": "Biennale, sans-serif",
+    "view": {"stroke": "transparent"},
+    "background": "#f7f7f7",
+    "range": {"category": {"scheme": "observable10"}},
+    "axis": {
+      "labelColor": "#676A86",
+      "labelFontSize": 11,
+      "labelFont": "Biennale, sans-serif",
+      "labelOpacity": 0.7,
+      "tickColor": "#676A86",
+      "tickOpacity": 0.5,
+      "domainColor": "#676A86",
+      "domainOpacity": 0.5,
+      "gridColor": "#676A86",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.5,
+      "title": null,
+      "titleColor": "#676A86",
+      "titleOpacity": 0.8,
+      "tickSize": 4
+    },
+    "axisYQuantitative": {
+      "gridColor": "#676A86",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.5,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 4
+    },
+    "title": {
+      "font": "Lexend, sans-serif",
+      "fontSize": 20,
+      "color": "#1a1a1a",
+      "subtitleFontSize": 16,
+      "subtitleColor": "#676A86",
+      "anchor": "start"
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelFont": "Lexend, sans-serif"
+    }
+  }
+}

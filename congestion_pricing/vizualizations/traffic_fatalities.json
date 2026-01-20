@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/traffic_fatalities.csv"
+  },
+  "height":400,
+  "width":600,
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "Year", "type": "ordinal"},
+    "y": {"field": "Fatalities", "type": "quantitative"},
+    "color": {
+      "field": "Vehicle Type",
+      "type": "nominal"
+    },
+    "tooltip": [
+      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {"field": "Vehicle Type", "type": "nominal", "title": "Vehicle Type"},
+      {"field": "Fatalities", "type": "quantitative", "title": "Fatalities"}
+    ]
+  },
+  "title":{
+    "text": "2025 saw New York's safest roads in more than a decade.",
+    "subtitle":[
+      "Traffic fatalities in New York City by vehicle type, 2013-2025.",
+      "Data: NYC DOT.",
+      ""
+    ]
+  },
+  "config": {
+    "font": "Biennale, sans-serif",
+    "view": {"stroke": "transparent"},
+    "background": "#f7f7f7",
+    "range": {"category": {"scheme": "observable10"}},
+    "axis": {
+      "labelColor": "#676A86",
+      "labelFontSize": 11,
+      "labelFont": "Biennale, sans-serif",
+      "labelOpacity": 0.7,
+      "tickColor": "#676A86",
+      "tickOpacity": 0.5,
+      "domainColor": "#676A86",
+      "domainOpacity": 0.5,
+      "gridColor": "#676A86",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.5,
+      "title": null,
+      "titleColor": "#676A86",
+      "titleOpacity": 0.8,
+      "tickSize": 4
+    },
+    "axisXDiscrete": {
+      "labelAngle": -45
+    },
+     "axisYQuantitative": {
+      "tickCount": 3
+     } ,
+    "title": {
+      "font": "Lexend, sans-serif",
+      "fontSize": 20,
+      "color": "#1a1a1a",
+      "subtitleFontSize": 16,
+      "subtitleColor": "#676A86",
+      "anchor":"start"
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelFont": "Lexend, sans-serif"
+    },
+    "legend": {
+      "title": null,
+      "orient": "top"
+    }
+  }
+}

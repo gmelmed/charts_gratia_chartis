@@ -6,7 +6,8 @@
   "transform": [
     {"filter": "toDate(datum.date) >= toDate('2024-09-01')"},
     {"filter": "datum.measure === 'daily_low_90d_ma' || datum.measure === 'daily_high_90d_ma'"},
-    {"filter": "datum.site_name != 'Midtown-DOT (Manhattan)'"}
+    {"filter": "datum.site_name != 'Hamilton Bridge (Bronx)'"},
+    {"pivot": "measure", "value": "concentration", "groupby": ["date", "site_name"]}
   ],
   "columns": 2,
   "facet": {
@@ -17,51 +18,75 @@
   "spec": {
     "width": 350,
     "height": 250,
-    "encoding": {
-      "x": {
-        "field": "date",
-        "type": "temporal",
-        "axis": {
-          "format": "%Y",
-          "tickCount": "year"
-        }
-      },
-      "y": {
-        "field": "concentration",
-        "type": "quantitative",
-        "scale": {"type": "linear", "zero": false},
-        "title": null,
-        "axis": {"format": "~s"}
-      },
-      "color": {
-        "field": "measure",
-        "type": "nominal",
-        "scale": {
-          "domain": ["daily_high_90d_ma", "daily_low_90d_ma"],
-          "range": ["#4269d0", "#efb118"]
-        },
-        "legend": {
-          "title": null,
-          "orient": "top",
-          "labelExpr": "datum.value === 'daily_high_90d_ma' ? 'Daily High' : 'Daily Low'"
-        }
-      }
-    },
     "layer": [
       {
-        "mark": {"type": "line"}
-      },
-      {
-        "transform": [{"filter": {"param": "hover", "empty": false}}],
-        "mark": {
-          "type": "point",
-          "filled": true,
-          "size": 60
-        }
+        "transform": [{"fold": ["daily_high_90d_ma", "daily_low_90d_ma"], "as": ["measure", "concentration"]}],
+        "encoding": {
+          "x": {
+            "field": "date",
+            "type": "temporal",
+            "axis": {
+              "format": "%Y",
+              "tickCount": "year"
+            }
+          },
+          "y": {
+            "field": "concentration",
+            "type": "quantitative",
+            "scale": {"type": "linear", "zero": false},
+            "title": null,
+            "axis": {"format": "~s"}
+          },
+          "color": {
+            "field": "measure",
+            "type": "nominal",
+            "scale": {
+              "domain": ["daily_high_90d_ma", "daily_low_90d_ma"],
+              "range": ["#4269d0", "#efb118"]
+            },
+            "legend": {
+              "title": null,
+              "orient": "top",
+              "labelExpr": "datum.value === 'daily_high_90d_ma' ? 'Daily High' : 'Daily Low'"
+            }
+          },
+          "tooltip": [
+            {
+              "field": "date",
+              "type": "temporal",
+              "format": "%B %d, %Y",
+              "title": "Date"
+            },
+            {
+              "field": "daily_high_90d_ma",
+              "type": "quantitative",
+              "format": ",.1f",
+              "title": "Daily High (µg/m³)"
+            },
+            {
+              "field": "daily_low_90d_ma",
+              "type": "quantitative",
+              "format": ",.1f",
+              "title": "Daily Low (µg/m³)"
+            }
+          ]
+        },
+        "layer": [
+          {"mark": {"type": "line"}},
+          {
+            "transform": [{"filter": {"param": "hover", "empty": false}}],
+            "mark": {
+              "type": "point",
+              "filled": true,
+              "size": 60
+            }
+          }
+        ]
       },
       {
         "mark": "rule",
         "encoding": {
+          "x": {"field": "date", "type": "temporal"},
           "opacity": {
             "condition": {"value": 0.3, "param": "hover", "empty": false},
             "value": 0
@@ -74,20 +99,16 @@
               "title": "Date"
             },
             {
-              "field": "measure",
-              "type": "nominal",
-              "title": "Measure"
-            },
-            {
-              "field": "concentration",
+              "field": "daily_high_90d_ma",
               "type": "quantitative",
               "format": ",.1f",
-              "title": "Concentration (µg/m³)"
+              "title": "Daily High (µg/m³)"
             },
             {
-              "field": "site_name",
-              "type": "nominal",
-              "title": "Site"
+              "field": "daily_low_90d_ma",
+              "type": "quantitative",
+              "format": ",.1f",
+              "title": "Daily Low (µg/m³)"
             }
           ]
         },
@@ -96,7 +117,7 @@
             "name": "hover",
             "select": {
               "type": "point",
-              "fields": ["date", "site_name"],
+              "fields": ["date"],
               "nearest": true,
               "on": "pointerover",
               "clear": "pointerout"
@@ -121,9 +142,9 @@
   },
   "resolve": {"scale": {"y": "independent"}},
   "title": {
-    "text": "PM2.5 Air Quality by Monitoring Site",
+    "text": "Air Quality has improved, but not evenly.",
     "subtitle": [
-      "Daily high and low concentrations.",
+      "90-day average of daily high and low PM2.5 concentrations.",
       "Vertical line represents introduction of congestion pricing.",
       "Data: NYC Open Data.",
       ""
