@@ -1,39 +1,39 @@
 Month,Metric,Value
-2024-12-01,Service Rate,0.9438766384751003
-2024-11-01,Service Rate,0.9524316129632832
-2024-10-01,Service Rate,0.9591666329979933
-2024-09-01,Service Rate,0.9583990000543449
-2024-08-01,Service Rate,0.949840323048906
-2024-07-01,Service Rate,0.9445680591867386
-2024-06-01,Service Rate,0.9474553453707687
-2024-05-01,Service Rate,0.9558712579538499
-2024-04-01,Service Rate,0.9596376677001329
-2024-03-01,Service Rate,0.9585802942612092
-2024-02-01,Service Rate,0.9413655872024971
-2024-01-01,Service Rate,0.9378174270193879
-2023-12-01,Service Rate,0.9316322475436121
-2023-11-01,Service Rate,0.9457099073095978
-2023-10-01,Service Rate,0.9409308126742997
-2023-09-01,Service Rate,0.9457609588416025
-2023-08-01,Service Rate,0.9441902248673535
-2023-07-01,Service Rate,0.9519013419554208
-2023-06-01,Service Rate,0.9475677126750216
-2023-05-01,Service Rate,0.9502711031645662
-2023-04-01,Service Rate,0.9620619792261157
-2023-03-01,Service Rate,0.9509291073557254
-2023-02-01,Service Rate,0.9572140725217502
-2023-01-01,Service Rate,0.9666919532479209
-2025-06-01,Service Rate,0.960010558268444
-2025-09-01,Service Rate,0.9547250881892687
-2025-01-01,Service Rate,0.942244611059044
-2025-03-01,Service Rate,0.965572936538217
-2025-05-01,Service Rate,0.9646346836689734
-2025-02-01,Service Rate,0.9475305975521958
-2025-04-01,Service Rate,0.967808002639139
-2025-11-01,Service Rate,0.9579948432904472
-2025-10-01,Service Rate,0.9531694799727357
-2025-08-01,Service Rate,0.9524050239141424
-2025-07-01,Service Rate,0.9476150024454912
+2024-12-01,Service Rate (%),0.9438766384751003
+2024-11-01,Service Rate (%),0.9524316129632832
+2024-10-01,Service Rate (%),0.9591666329979933
+2024-09-01,Service Rate (%),0.9583990000543449
+2024-08-01,Service Rate (%),0.949840323048906
+2024-07-01,Service Rate (%),0.9445680591867386
+2024-06-01,Service Rate (%),0.9474553453707687
+2024-05-01,Service Rate (%),0.9558712579538499
+2024-04-01,Service Rate (%),0.9596376677001329
+2024-03-01,Service Rate (%),0.9585802942612092
+2024-02-01,Service Rate (%),0.9413655872024971
+2024-01-01,Service Rate (%),0.9378174270193879
+2023-12-01,Service Rate (%),0.9316322475436121
+2023-11-01,Service Rate (%),0.9457099073095978
+2023-10-01,Service Rate (%),0.9409308126742997
+2023-09-01,Service Rate (%),0.9457609588416025
+2023-08-01,Service Rate (%),0.9441902248673535
+2023-07-01,Service Rate (%),0.9519013419554208
+2023-06-01,Service Rate (%),0.9475677126750216
+2023-05-01,Service Rate (%),0.9502711031645662
+2023-04-01,Service Rate (%),0.9620619792261157
+2023-03-01,Service Rate (%),0.9509291073557254
+2023-02-01,Service Rate (%),0.9572140725217502
+2023-01-01,Service Rate (%),0.9666919532479209
+2025-06-01,Service Rate (%),0.960010558268444
+2025-09-01,Service Rate (%),0.9547250881892687
+2025-01-01,Service Rate (%),0.942244611059044
+2025-03-01,Service Rate (%),0.965572936538217
+2025-05-01,Service Rate (%),0.9646346836689734
+2025-02-01,Service Rate (%),0.9475305975521958
+2025-04-01,Service Rate (%),0.967808002639139
+2025-11-01,Service Rate (%),0.9579948432904472
+2025-10-01,Service Rate (%),0.9531694799727357
+2025-08-01,Service Rate (%),0.9524050239141424
+2025-07-01,Service Rate (%),0.9476150024454912
 2024-12-01,Journey Time Performance (Over 5 Min %),0.137308385
 2024-11-01,Journey Time Performance (Over 5 Min %),0.134132565
 2024-10-01,Journey Time Performance (Over 5 Min %),0.1241476055
@@ -104,73 +104,73 @@ Month,Metric,Value
 2025-10-01,Journey Time Performance (Within 5 Min %),0.854681893638013
 2025-08-01,Journey Time Performance (Within 5 Min %),0.868463511390491
 2025-07-01,Journey Time Performance (Within 5 Min %),0.856636316357505
-2024-12-01,Additional Platform Time,1.1810536
-2024-11-01,Additional Platform Time,1.26439455
-2024-10-01,Additional Platform Time,1.1092264
-2024-09-01,Additional Platform Time,1.18776805
-2024-08-01,Additional Platform Time,1.19958545
-2024-07-01,Additional Platform Time,1.2827806
-2024-06-01,Additional Platform Time,1.146675
-2024-05-01,Additional Platform Time,1.2261005
-2024-04-01,Additional Platform Time,1.15993565
-2024-03-01,Additional Platform Time,1.2224242
-2024-02-01,Additional Platform Time,1.31662335
-2024-01-01,Additional Platform Time,1.33469935
-2023-12-01,Additional Platform Time,1.4745096
-2023-11-01,Additional Platform Time,1.11418205
-2023-10-01,Additional Platform Time,1.2868259
-2023-09-01,Additional Platform Time,1.17243255
-2023-08-01,Additional Platform Time,1.3101239
-2023-07-01,Additional Platform Time,1.1441858
-2023-06-01,Additional Platform Time,1.23452325
-2023-05-01,Additional Platform Time,1.1972325
-2023-04-01,Additional Platform Time,1.0657445
-2023-03-01,Additional Platform Time,1.1138333
-2023-02-01,Additional Platform Time,1.0734804
-2023-01-01,Additional Platform Time,1.1650836
-2025-06-01,Additional Platform Time,1.04481317373737
-2025-09-01,Additional Platform Time,1.15211719536268
-2025-01-01,Additional Platform Time,1.1808805203851
-2025-03-01,Additional Platform Time,1.08952874442692
-2025-05-01,Additional Platform Time,1.08783895806876
-2025-02-01,Additional Platform Time,1.18813293753114
-2025-04-01,Additional Platform Time,1.17124969822762
-2025-11-01,Additional Platform Time,1.13126479904415
-2025-10-01,Additional Platform Time,1.2514623032621
-2025-08-01,Additional Platform Time,1.14013266738142
-2025-07-01,Additional Platform Time,1.38902580062358
-2024-12-01,Additional Train Time,0.438450285
-2024-11-01,Additional Train Time,0.46452325
-2024-10-01,Additional Train Time,0.47343263
-2024-09-01,Additional Train Time,0.4248323
-2024-08-01,Additional Train Time,0.41236943
-2024-07-01,Additional Train Time,0.27802735
-2024-06-01,Additional Train Time,0.35394326
-2024-05-01,Additional Train Time,0.38236641
-2024-04-01,Additional Train Time,0.40265644
-2024-03-01,Additional Train Time,0.42958365
-2024-02-01,Additional Train Time,0.398123575
-2024-01-01,Additional Train Time,0.5386411
-2023-12-01,Additional Train Time,0.393342275
-2023-11-01,Additional Train Time,0.417766185
-2023-10-01,Additional Train Time,0.47544403
-2023-09-01,Additional Train Time,0.42638101
-2023-08-01,Additional Train Time,0.369593915
-2023-07-01,Additional Train Time,0.277926165
-2023-06-01,Additional Train Time,0.358184055
-2023-05-01,Additional Train Time,0.411799535
-2023-04-01,Additional Train Time,0.32729343
-2023-03-01,Additional Train Time,0.51783335
-2023-02-01,Additional Train Time,0.39118749
-2023-01-01,Additional Train Time,0.441732025
-2025-06-01,Additional Train Time,0.29776221707862
-2025-09-01,Additional Train Time,0.471195191944629
-2025-01-01,Additional Train Time,0.541543733162861
-2025-03-01,Additional Train Time,0.451986887926494
-2025-05-01,Additional Train Time,0.351808015852665
-2025-02-01,Additional Train Time,0.3952486253134
-2025-04-01,Additional Train Time,0.362731170220644
-2025-11-01,Additional Train Time,0.466866929220765
-2025-10-01,Additional Train Time,0.483504833196772
-2025-08-01,Additional Train Time,0.341728060063901
-2025-07-01,Additional Train Time,0.43812211596766
+2024-12-01,Additional Platform Time (Minutes),1.1810536
+2024-11-01,Additional Platform Time (Minutes),1.26439455
+2024-10-01,Additional Platform Time (Minutes),1.1092264
+2024-09-01,Additional Platform Time (Minutes),1.18776805
+2024-08-01,Additional Platform Time (Minutes),1.19958545
+2024-07-01,Additional Platform Time (Minutes),1.2827806
+2024-06-01,Additional Platform Time (Minutes),1.146675
+2024-05-01,Additional Platform Time (Minutes),1.2261005
+2024-04-01,Additional Platform Time (Minutes),1.15993565
+2024-03-01,Additional Platform Time (Minutes),1.2224242
+2024-02-01,Additional Platform Time (Minutes),1.31662335
+2024-01-01,Additional Platform Time (Minutes),1.33469935
+2023-12-01,Additional Platform Time (Minutes),1.4745096
+2023-11-01,Additional Platform Time (Minutes),1.11418205
+2023-10-01,Additional Platform Time (Minutes),1.2868259
+2023-09-01,Additional Platform Time (Minutes),1.17243255
+2023-08-01,Additional Platform Time (Minutes),1.3101239
+2023-07-01,Additional Platform Time (Minutes),1.1441858
+2023-06-01,Additional Platform Time (Minutes),1.23452325
+2023-05-01,Additional Platform Time (Minutes),1.1972325
+2023-04-01,Additional Platform Time (Minutes),1.0657445
+2023-03-01,Additional Platform Time (Minutes),1.1138333
+2023-02-01,Additional Platform Time (Minutes),1.0734804
+2023-01-01,Additional Platform Time (Minutes),1.1650836
+2025-06-01,Additional Platform Time (Minutes),1.04481317373737
+2025-09-01,Additional Platform Time (Minutes),1.15211719536268
+2025-01-01,Additional Platform Time (Minutes),1.1808805203851
+2025-03-01,Additional Platform Time (Minutes),1.08952874442692
+2025-05-01,Additional Platform Time (Minutes),1.08783895806876
+2025-02-01,Additional Platform Time (Minutes),1.18813293753114
+2025-04-01,Additional Platform Time (Minutes),1.17124969822762
+2025-11-01,Additional Platform Time (Minutes),1.13126479904415
+2025-10-01,Additional Platform Time (Minutes),1.2514623032621
+2025-08-01,Additional Platform Time (Minutes),1.14013266738142
+2025-07-01,Additional Platform Time (Minutes),1.38902580062358
+2024-12-01,Additional Train Time (Minutes),0.438450285
+2024-11-01,Additional Train Time (Minutes),0.46452325
+2024-10-01,Additional Train Time (Minutes),0.47343263
+2024-09-01,Additional Train Time (Minutes),0.4248323
+2024-08-01,Additional Train Time (Minutes),0.41236943
+2024-07-01,Additional Train Time (Minutes),0.27802735
+2024-06-01,Additional Train Time (Minutes),0.35394326
+2024-05-01,Additional Train Time (Minutes),0.38236641
+2024-04-01,Additional Train Time (Minutes),0.40265644
+2024-03-01,Additional Train Time (Minutes),0.42958365
+2024-02-01,Additional Train Time (Minutes),0.398123575
+2024-01-01,Additional Train Time (Minutes),0.5386411
+2023-12-01,Additional Train Time (Minutes),0.393342275
+2023-11-01,Additional Train Time (Minutes),0.417766185
+2023-10-01,Additional Train Time (Minutes),0.47544403
+2023-09-01,Additional Train Time (Minutes),0.42638101
+2023-08-01,Additional Train Time (Minutes),0.369593915
+2023-07-01,Additional Train Time (Minutes),0.277926165
+2023-06-01,Additional Train Time (Minutes),0.358184055
+2023-05-01,Additional Train Time (Minutes),0.411799535
+2023-04-01,Additional Train Time (Minutes),0.32729343
+2023-03-01,Additional Train Time (Minutes),0.51783335
+2023-02-01,Additional Train Time (Minutes),0.39118749
+2023-01-01,Additional Train Time (Minutes),0.441732025
+2025-06-01,Additional Train Time (Minutes),0.29776221707862
+2025-09-01,Additional Train Time (Minutes),0.471195191944629
+2025-01-01,Additional Train Time (Minutes),0.541543733162861
+2025-03-01,Additional Train Time (Minutes),0.451986887926494
+2025-05-01,Additional Train Time (Minutes),0.351808015852665
+2025-02-01,Additional Train Time (Minutes),0.3952486253134
+2025-04-01,Additional Train Time (Minutes),0.362731170220644
+2025-11-01,Additional Train Time (Minutes),0.466866929220765
+2025-10-01,Additional Train Time (Minutes),0.483504833196772
+2025-08-01,Additional Train Time (Minutes),0.341728060063901
+2025-07-01,Additional Train Time (Minutes),0.43812211596766

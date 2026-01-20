@@ -1,0 +1,233 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/performance_data.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum.Metric != 'Journey Time Performance (Over 5 Min %)'"
+        }
+    ],
+    "columns": 2,
+    "facet": {
+        "field": "Metric",
+        "type": "ordinal",
+        "sort": {
+            "op": "min",
+            "field": "Month"
+        },
+        "title": null
+    },
+    "resolve": {
+        "scale": {
+            "y": "independent"
+        }
+    },
+    "spec": {
+        "width": 350,
+        "height": 250,
+        "encoding": {
+            "x": {
+                "field": "Month",
+                "type": "temporal",
+                "axis": {
+                    "tickCount": "year"
+                }
+            }
+        },
+        "layer": [
+            {
+                "encoding": {
+                    "y": {
+                        "field": "Value",
+                        "type": "quantitative",
+                        "scale": {
+                            "type": "linear",
+                            "zero": false
+                        },
+                        "title": null,
+                        "axis": {
+                            "format": ".2f"
+                        }
+                    },
+                    "tooltip": [
+                        {
+                            "field": "Month",
+                            "type": "temporal",
+                            "title": "Month",
+                            "format": "%B %d, %Y"
+                        },
+                        {
+                            "field": "Value",
+                            "type": "quantitative",
+                            "title": "Count",
+                            "format": ",.2f"
+                        }
+                    ]
+                },
+                "layer": [
+                    {
+                        "mark": {
+                            "type": "line",
+                            "color": "#4269d0"
+                        }
+                    },
+                    {
+                        "transform": [
+                            {
+                                "filter": {
+                                    "param": "hover",
+                                    "empty": false
+                                }
+                            }
+                        ],
+                        "mark": {
+                            "type": "point",
+                            "filled": true,
+                            "size": 60,
+                            "color": "#4269d0"
+                        }
+                    }
+                ]
+            },
+            {
+                "mark": "rule",
+                "encoding": {
+                    "opacity": {
+                        "condition": {
+                            "value": 0.3,
+                            "param": "hover",
+                            "empty": false
+                        },
+                        "value": 0
+                    },
+                    "tooltip": [
+                        {
+                            "field": "Month",
+                            "type": "temporal",
+                            "format": "%B %d, %Y",
+                            "title": "Month"
+                        },
+                        {
+                            "field": "Value",
+                            "type": "quantitative",
+                            "format": ",.2f",
+                            "title": "Value"
+                        }
+                    ]
+                },
+                "params": [
+                    {
+                        "name": "hover",
+                        "select": {
+                            "type": "point",
+                            "fields": [
+                                "Month",
+                                "Metric"
+                            ],
+                            "nearest": true,
+                            "on": "pointerover",
+                            "clear": "pointerout"
+                        }
+                    }
+                ]
+            },
+            {
+                "mark": {
+                    "type": "rule",
+                    "color": "#676A86",
+                    "strokeWidth": 2,
+                    "strokeDash": [
+                        4,
+                        4
+                    ]
+                },
+                "encoding": {
+                    "x": {
+                        "datum": {
+                            "year": 2025,
+                            "month": 1,
+                            "Month": 5
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "resolve": {
+        "scale": {
+            "y": "independent"
+        }
+    },
+    "title": {
+        "text": "Ridership is up in all major forms of NYC public transit.",
+        "subtitle": [
+            "90-day moving average of seasonally-adjusted daily ridership.",
+            "Vertical line represents introduction of congestion pricing.",
+            "Data: Author's Calculations via MTA.",
+            ""
+        ]
+    },
+    "config": {
+        "font": "Biennale, sans-serif",
+        "view": {
+            "stroke": "transparent"
+        },
+        "background": "#f7f7f7",
+        "range": {
+            "category": {
+                "scheme": "observable10"
+            }
+        },
+        "axis": {
+            "labelColor": "#676A86",
+            "labelFontSize": 11,
+            "labelFont": "Biennale, sans-serif",
+            "labelOpacity": 0.7,
+            "tickColor": "#676A86",
+            "tickOpacity": 0.5,
+            "domainColor": "#676A86",
+            "domainOpacity": 0.5,
+            "gridColor": "#676A86",
+            "gridDash": [
+                2,
+                2
+            ],
+            "gridOpacity": 0.5,
+            "title": null,
+            "titleColor": "#676A86",
+            "titleOpacity": 0.8,
+            "tickSize": 4
+        },
+        "axisXTemporal": {
+            "grid": false
+        },
+        "axisYQuantitative": {
+            "gridColor": "#676A86",
+            "gridDash": [
+                1,
+                5
+            ],
+            "gridOpacity": 0.5,
+            "ticks": false,
+            "labelPadding": 5,
+            "tickCount": 4,
+            "titleAngle": 0,
+            "titleAlign": "left",
+            "titleBaseline": "bottom",
+            "titleX": 0,
+            "titleY": -5
+        },
+        "title": {
+            "font": "Lexend, sans-serif",
+            "fontSize": 20,
+            "color": "#1a1a1a",
+            "subtitleFontSize": 16,
+            "subtitleColor": "#676A86"
+        },
+        "header": {
+            "labelFontSize": 12,
+            "labelFont": "Lexend, sans-serif"
+        }
+    }
+}
