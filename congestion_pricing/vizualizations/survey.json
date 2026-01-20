@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/survey_data.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "Borough",
+      "type": "nominal",
+      "sort": ["Overall", "Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"]
+    },
+    "x": {
+      "field": "percentage",
+      "type": "quantitative",
+      "stack": "normalize"
+    },
+    "color": {
+      "field": "response",
+      "type": "nominal",
+      "scale": {
+        "scheme": "purpleorange",
+        "domain": [
+          "Strongly support",
+          "Somewhat support",
+          "Neutral or no opinion",
+          "Somewhat oppose",
+          "Strongly oppose"
+        ]
+      },
+      "legend": {
+        "orient": "top"
+      }
+    },
+    "tooltip": [
+      {"field": "Borough", "type": "nominal"},
+      {"field": "response", "type": "nominal", "title": "Response"},
+      {"field": "percentage", "type": "quantitative", "format": ".1%", "title": "Percentage"}
+    ]
+  },
+  "width": 600,
+  "height": 400,
+  "config": {
+    "font": "Lexend, sans-serif",
+    "view": {"stroke": "transparent"},
+    "background": "#f7f7f7",
+    "range": {
+      "category": [
+        "#E07A5F",
+        "#3D405B",
+        "#81B29A",
+        "#F2CC8F",
+        "#F4F1DE"
+      ]
+    },
+    "point": {"filled": true, "opacity": 0.95},
+    "axis": {
+      "labelColor": "#676A86",
+      "labelFontSize": 12,
+      "labelFont": "Lexend, sans-serif",
+      "tickColor": "#676A86",
+      "tickOpacity": 0.5,
+      "domainColor": "#676A86",
+      "domainOpacity": 0.5,
+      "gridColor": "#676A86",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.5,
+      "title": null,
+      "titleColor": "#676A86",
+      "titleOpacity": 0.8,
+      "tickSize": 4
+    },
+    "axisXQuantitative": {
+      "labelAngle": 0,
+      "tickCount": 4 
+    },
+    "axisXTemporal": {"grid": false},
+    "axisYQuantitative": {
+      "gridColor": "#676A86",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.5,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 8,
+      "titleAngle": 0,
+      "titleAlign": "left",
+      "titleBaseline": "bottom",
+      "titleX": 0,
+      "titleY": -5,
+      "format": ".0%"
+    },
+    "legend": {
+      "titleFont": "Lexend, sans-serif",
+      "titleFontSize": 14,
+      "titleColor": "#1a1a1a",
+      "title": null,
+      "labelColor": "#1a1a1a",
+      "labelFontSize": 12
+    },
+    "title": {
+      "font": "Lexend, sans-serif",
+      "fontSize": 16,
+      "color": "#1a1a1a",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#676A86"
+    }
+  }
+}
