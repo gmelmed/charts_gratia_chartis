@@ -160,10 +160,9 @@
         }
     },
     "title": {
-        "text": "Ridership is up in all major forms of NYC public transit.",
+        "text": "The MTA's core performance metrics have changed little.",
         "subtitle": [
-            "90-day moving average of seasonally-adjusted daily ridership.",
-            "Vertical line represents introduction of congestion pricing.",
+            "Vertical line represents introduction of congestion pricing",
             "Data: Author's Calculations via MTA.",
             ""
         ]
