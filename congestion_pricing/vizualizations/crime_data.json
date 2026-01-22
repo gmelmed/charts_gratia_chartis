@@ -4,8 +4,7 @@
     "url": "https://raw.githubusercontent.com/gmelmed/charts_gratia_chartis/refs/heads/main/congestion_pricing/data/processed/crime_data.csv"
   },
   "transform": [
-    {"filter": "toDate(datum.Month) >= toDate('2024-01-01')"},
-    {"filter": "toDate(datum.Month) <= toDate('2025-10-01')"}
+    {"filter": "toDate(datum.Month) >= toDate('2023-06-01')"}
   ],
   "width": 600,
   "height": 400,
@@ -13,7 +12,7 @@
     {
       "mark": {
         "type":"bar",
-        "width": 20
+        "width":15
         },
       "encoding": {
         "x": {
