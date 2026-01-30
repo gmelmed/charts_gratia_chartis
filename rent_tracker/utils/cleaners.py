@@ -1,17 +1,14 @@
-"""Data cleaning utility functions."""
-
-
 def clean_metro_name(name: str) -> str:
     """
-    Clean metro area name to format: 'City, ST'
+    clean metro area name to format: 'City, ST'
     
-    Extracts first city and first state from metro area names like:
+    extracts first city and first state from metro area names like:
     'New York-Newark-Jersey City, NY-NJ-PA' -> 'New York, NY'
     
-    Args:
+    args:
         name (str): Raw metro area name
         
-    Returns:
+    returns:
         str: Cleaned name in format 'City, ST'
     """
     parts = name.split(',')
